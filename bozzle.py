@@ -39,10 +39,16 @@ from grudge.dof_desc import DTAG_BOUNDARY
 from grudge.eager import EagerDGDiscretization
 from grudge.shortcuts import make_visualizer
 
-from meshmode.array_context import (
-    PyOpenCLArrayContext,
-    SingleGridWorkBalancingPytatoArrayContext as PytatoPyOpenCLArrayContext
+from grudge.array_context import (
+    MPIPytatoPyOpenCLArrayContext as PytatoPyOpenCLArrayContext,
+    PyOpenCLArrayContext
 )
+
+# from meshmode.array_context import (
+#     PyOpenCLArrayContext,
+#     SingleGridWorkBalancingPytatoArrayContext as PytatoPyOpenCLArrayContext
+# )
+
 from mirgecom.profiling import PyOpenCLProfilingArrayContext
 
 from mirgecom.navierstokes import ns_operator
@@ -125,9 +131,15 @@ def main(ctx_factory=cl.create_some_context, restart_filename=None,
     else:
         queue = cl.CommandQueue(cl_ctx)
 
-    actx = actx_class(
-        queue,
-        allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
+    if actx_class == PytatoPyOpenCLArrayContext:
+        actx = actx_class(comm,
+            queue,
+            mpi_base_tag=14000,
+            allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
+    else:
+        actx = actx_class(
+            queue,
+            allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
 
     from mirgecom.simutil import global_reduce as _global_reduce
     global_reduce = partial(_global_reduce, comm=comm)
