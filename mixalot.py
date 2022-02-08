@@ -140,9 +140,9 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     dim = 3
     # nel_1d = 8
     order = 1
-    x_scale = 8
-    y_scale = 4
-    z_scale = 4
+    x_scale = 2
+    y_scale = 1
+    z_scale = 1
     chlen = .01
     domain_xlen = .1
     domain_ylen = .02
@@ -233,12 +233,12 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             npts_axis = (npts_x, npts_y)
             box_ll = (xleft, ybottom)
             box_ur = (xright, ytop)
-            periodic = (True, True)
+            periodic = (False, False)
         else:
             npts_axis = (npts_x, npts_y, npts_z)
             box_ll = (xleft, ybottom, zback)
             box_ur = (xright, ytop, zfront)
-            periodic = (False, False, False)
+            periodic = (True, True, True)
 
         generate_mesh = partial(_get_box_mesh, dim, a=box_ll, b=box_ur, n=npts_axis,
                                 periodic=periodic)
@@ -512,14 +512,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             press = dv.pressure
 
             from grudge.op import nodal_min_loc, nodal_max_loc
-            tmin = allsync(actx.to_numpy(nodal_min_loc(discr, "vol", temp)),
-                           comm=comm, op=MPI.MIN)
-            tmax = allsync(actx.to_numpy(nodal_max_loc(discr, "vol", temp)),
-                           comm=comm, op=MPI.MAX)
-            pmin = allsync(actx.to_numpy(nodal_min_loc(discr, "vol", press)),
-                           comm=comm, op=MPI.MIN)
-            pmax = allsync(actx.to_numpy(nodal_max_loc(discr, "vol", press)),
-                           comm=comm, op=MPI.MAX)
+            tmin = global_reduce(actx.to_numpy(nodal_min_loc(discr, "vol", temp)),
+                                 op="min")
+            tmax = global_reduce(actx.to_numpy(nodal_max_loc(discr, "vol", temp)),
+                                 op="max")
+            pmin = global_reduce(actx.to_numpy(nodal_min_loc(discr, "vol", press)),
+                                 op="min")
+            pmax = global_reduce(actx.to_numpy(nodal_max_loc(discr, "vol", press)),
+                                 op="max")
             dv_status_msg = f"\nP({pmin}, {pmax}), T({tmin}, {tmax})"
             status_msg = status_msg + dv_status_msg
 
@@ -622,14 +622,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         if constant_cfl:
             ts_field = current_cfl * compute_dt(state)
             from grudge.op import nodal_min_loc
-            dt = allsync(actx.to_numpy(nodal_min_loc(discr, "vol", ts_field)),
-                         comm=comm, op=MPI.MIN)
+            dt = global_reduce(actx.to_numpy(nodal_min_loc(discr, "vol", ts_field)),
+                               op="min")
             cfl = current_cfl
         else:
             ts_field = compute_cfl(state, current_dt)
             from grudge.op import nodal_max_loc
-            cfl = allsync(actx.to_numpy(nodal_max_loc(discr, "vol", ts_field)),
-                          comm=comm, op=MPI.MAX)
+            cfl = global_reduce(actx.to_numpy(nodal_max_loc(discr, "vol", ts_field)),
+                                op="max")
         return ts_field, cfl, min(t_remaining, dt)
 
     def my_pre_step(step, t, dt, state):
