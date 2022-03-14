@@ -186,10 +186,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     # Time loop control parameters
     current_step = 0
     t_final = 2e-8
-    current_cfl = 1.0
+    current_cfl = 0.05
     current_dt = 1e-9
     current_t = 0
-    constant_cfl = False
+    constant_cfl = True
 
     # i.o frequencies
     nstatus = 100
