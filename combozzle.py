@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 import logging
+import yaml
 import numpy as np
 import pyopencl as cl
 import pyopencl.tools as cl_tools
@@ -99,7 +100,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
          use_leap=False, use_overintegration=False,
          use_profiling=False, casename=None, lazy=False,
          rst_filename=None, actx_class=PyOpenCLArrayContext,
-         log_dependent=True):
+         log_dependent=False, input_file=None):
     """Drive example."""
     cl_ctx = ctx_factory()
 
@@ -110,6 +111,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     nproc = comm.Get_size()
+    nparts = nproc
 
     from mirgecom.simutil import global_reduce as _global_reduce
     global_reduce = partial(_global_reduce, comm=comm)
@@ -131,14 +133,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                 allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)),
                 force_device_scalars=True)
 
-    # if actx_class == PytatoPyOpenCLArrayContext:
-    #     actx = actx_class(comm, queue, mpi_base_tag=12000)
-    # else:
-    #     # actx = actx_class(
-    #     #    queue,
-    #     #    allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
-    #     actx = actx_class(queue)
-
     # Some discretization parameters
     dim = 3
     # nel_1d = 8
@@ -150,35 +144,12 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     domain_xlen = 1
     domain_ylen = 1
     domain_zlen = 1
-    xsize = domain_xlen*x_scale
-    ysize = domain_ylen*y_scale
-    zsize = domain_zlen*z_scale
-    ncx = int(xsize / chlen)
-    ncy = int(ysize / chlen)
-    ncz = int(zsize / chlen)
-    x0 = xsize/2
-    y0 = ysize/2
-    z0 = zsize/2
-    xleft = x0 - xsize/2
-    xright = x0 + xsize/2
-    ybottom = y0 - ysize/2
-    ytop = y0 + ysize/2
-    zback = z0 - zsize/2
-    zfront = z0 + zsize/2
 
     # {{{ Time stepping control
 
     # This example runs only 3 steps by default (to keep CI ~short)
     # With the mixture defined below, equilibrium is achieved at ~40ms
     # To run to equilibrium, set t_final >= 40ms.
-
-    # Time stepper selection
-    if use_leap:
-        from leap.rk import RK4MethodBuilder
-        timestepper = RK4MethodBuilder("state")
-    else:
-        timestepper = rk4_step
-        timestepper = euler_step
 
     # Time loop control parameters
     current_step = 0
@@ -187,35 +158,276 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     current_dt = 1e-9
     current_t = 0
     constant_cfl = False
+    integrator = "euler"
 
     # i.o frequencies
     nstatus = 100
     nviz = 100
     nhealth = 100
     nrestart = 1000
-    simulation_run = False
+    do_checkpoint = 0
+    boundary_report = 0
 
     # }}}  Time stepping control
 
+    init_temperature = 1500.
+    init_pressure = 101325.
+    init_density = 1.0
+
+    dummy_rhs_only = 0
+    timestepping_on = 1
+    adiabatic_boundary = 0
+    periodic_boundary = 1
     grid_only = 0
     discr_only = 0
     inviscid_only = 0
     inert_only = 0
     single_gas_only = 0
-    dummy_rhs_only = 0
-    adiabatic_boundary = 0
-    periodic_boundary = 1
-    timestepping_on = 1
-
-    init_temperature = 1500
-    wall_temperature = init_temperature
-    temperature_seed = init_temperature
+    nspecies = 7
 
     n_refine = 1
+    weak_scale = 1
     periodic = (periodic_boundary == 1,)*dim
+
+    if input_file:
+        input_data = None
+        if rank == 0:
+            with open(input_file) as f:
+                input_data = yaml.load(f, Loader=yaml.FullLoader)
+        input_data = comm.bcast(input_data, root=0)
+        try:
+            domain_xlen = float(input_data["domain_xlen"])
+        except KeyError:
+            pass
+        try:
+            domain_ylen = float(input_data["domain_ylen"])
+        except KeyError:
+            pass
+        try:
+            domain_zlen = float(input_data["domain_zlen"])
+        except KeyError:
+            pass
+        try:
+            x_scale = float(input_data["x_scale"])
+        except KeyError:
+            pass
+        try:
+            y_scale = float(input_data["y_scale"])
+        except KeyError:
+            pass
+        try:
+            z_scale = float(input_data["z_scale"])
+        except KeyError:
+            pass
+        try:
+            chlen = float(input_data["chlen"])
+        except KeyError:
+            pass
+        try:
+            weak_scale = float(input_data["weak_scale"])
+        except KeyError:
+            pass
+        try:
+            n_refine = int(input_data["h_scale"])
+        except KeyError:
+            pass
+        try:
+            boundary_report = int(input_data["boundary_report"])
+        except KeyError:
+            pass
+        try:
+            init_only = int(input_data["init_only"])
+        except KeyError:
+            pass
+        try:
+            grid_only = int(input_data["grid_only"])
+        except KeyError:
+            pass
+        try:
+            discr_only = int(input_data["discr_only"])
+        except KeyError:
+            pass
+        try:
+            inviscid_only = int(input_data["inviscid_only"])
+        except KeyError:
+            pass
+        try:
+            inert_only = int(input_data["inert_only"])
+        except KeyError:
+            pass
+        try:
+            single_gas_only = int(input_data["single_gas_only"])
+        except KeyError:
+            pass
+        try:
+            dummy_rhs_only = int(input_data["dummy_rhs_only"])
+        except KeyError:
+            pass
+        try:
+            adiabatic_boundary = int(input_data["adiabatic_boundary"])
+        except KeyError:
+            pass
+        try:
+            periodic_boundary = int(input_data["periodic_boundary"])
+        except KeyError:
+            pass
+        try:
+            do_checkpoint = int(input_data["do_checkpoint"])
+        except KeyError:
+            pass
+        try:
+            nviz = int(input_data["nviz"])
+        except KeyError:
+            pass
+        try:
+            nrestart = int(input_data["nrestart"])
+        except KeyError:
+            pass
+        try:
+            nhealth = int(input_data["nhealth"])
+        except KeyError:
+            pass
+        try:
+            nstatus = int(input_data["nstatus"])
+        except KeyError:
+            pass
+        try:
+            timestepping_on = int(input_data["timestepping_on"])
+        except KeyError:
+            pass
+        try:
+            logDependent = int(input_data["log_dependent"])
+            log_dependent = logDependent > 0
+        except KeyError:
+            pass
+        try:
+            current_dt = float(input_data["current_dt"])
+        except KeyError:
+            pass
+        try:
+            t_final = float(input_data["t_final"])
+        except KeyError:
+            pass
+        try:
+            alpha_sc = float(input_data["alpha_sc"])
+        except KeyError:
+            pass
+        try:
+            kappa_sc = float(input_data["kappa_sc"])
+        except KeyError:
+            pass
+        try:
+            s0_sc = float(input_data["s0_sc"])
+        except KeyError:
+            pass
+        try:
+            order = int(input_data["order"])
+        except KeyError:
+            pass
+        try:
+            nspecies = int(input_data["nspecies"])
+        except KeyError:
+            pass
+        try:
+            integrator = input_data["integrator"]
+        except KeyError:
+            pass
+        try:
+            init_pressure = float(input_data["init_pressure"])
+        except KeyError:
+            pass
+        try:
+            init_density = float(input_data["init_density"])
+        except KeyError:
+            pass
+        try:
+            init_temperature = float(input_data["init_temperature"])
+        except KeyError:
+            pass
+        try:
+            health_pres_min = float(input_data["health_pres_min"])
+        except KeyError:
+            pass
+        try:
+            health_pres_max = float(input_data["health_pres_max"])
+        except KeyError:
+            pass
+
+    # param sanity check
+    allowed_integrators = ["rk4", "euler", "lsrk54", "lsrk144"]
+    if integrator not in allowed_integrators:
+        error_message = "Invalid time integrator: {}".format(integrator)
+        raise RuntimeError(error_message)
+
+    if rank == 0:
+        print("#### Simluation control data: ####")
+        print(f"----- run control ------")
+        print(f"\t{grid_only=},{discr_only=},{inert_only=}")
+        print(f"\t{single_gas_only=},{dummy_rhs_only=}")
+        print(f"\t{periodic_boundary=},{adiabatic_boundary=}")
+        print(f"\t{timestepping_on=}, {inviscid_only=}")
+        print(f"\t{nspecies=}")
+        print("---- timestepping ------")
+        print(f"\tcurrent_dt = {current_dt}")
+        print(f"\tt_final = {t_final}")
+        print(f"\tconstant_cfl = {constant_cfl}")
+        print(f"\tTime integration {integrator}")
+        if constant_cfl:
+            print(f"\tcfl = {current_cfl}")
+        print("---- i/o frequencies -----")
+        print(f"\tnviz = {nviz}")
+        print(f"\tnrestart = {nrestart}")
+        print(f"\tnhealth = {nhealth}")
+        print(f"\tnstatus = {nstatus}")
+        print("----- domain ------")
+        print(f"\tspatial dimension: {dim}")
+        print(f"\tdomain_xlen = {domain_xlen}")
+        print(f"\tx_scale = {x_scale}")
+        if dim > 1:
+            print(f"\tdomain_ylen = {domain_xlen}")
+            print(f"\ty_scale = {y_scale}")
+        if dim > 2:
+            print(f"\tdomain_zlen = {domain_xlen}")
+            print(f"\tz_scale = {z_scale}")
+        print(f"\t----- discretization ----")
+        print(f"\tchar_len = {chlen}")
+        print(f"\torder = {order}")
+
+        # print(f"\tShock capturing parameters: alpha {alpha_sc}, "
+        #      f"s0 {s0_sc}, kappa {kappa_sc}")
+        if log_dependent:
+            print("\tDependent variable logging is ON.")
+        else:
+            print("\tDependent variable logging is OFF.")
+        print("#### Simluation control data: ####")
+
+    timestepper = rk4_step
+    if integrator == "euler":
+        timestepper = euler_step
+    if integrator == "lsrk54":
+        timestepper = lsrk54_step
+    if integrator == "lsrk144":
+        timestepper = lsrk144_step
+
+    xsize = domain_xlen*x_scale*weak_scale
+    ysize = domain_ylen*y_scale*weak_scale
+    zsize = domain_zlen*z_scale*weak_scale
+    ncx = int(xsize / chlen)
+    ncy = int(ysize / chlen)
+    ncz = int(zsize / chlen)
     npts_x = ncx * n_refine
     npts_y = ncy * n_refine
     npts_z = ncz * n_refine
+    x0 = xsize/2
+    y0 = ysize/2
+    z0 = zsize/2
+
+    xleft = x0 - xsize/2
+    xright = x0 + xsize/2
+    ybottom = y0 - ysize/2
+    ytop = y0 + ysize/2
+    zback = z0 - zsize/2
+    zfront = z0 + zsize/2
 
     if dim == 1:
         npts_axis = (npts_x,)
@@ -233,10 +445,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     if single_gas_only:
         inert_only = 1
 
-    print(f"{grid_only=},{discr_only=},{inert_only=}")
-    print(f"{single_gas_only=},{dummy_rhs_only=}")
-    print(f"{periodic_boundary=},{adiabatic_boundary=}")
-    print(f"{timestepping_on=}, {inviscid_only=}")
+    wall_temperature = init_temperature
+    temperature_seed = init_temperature
 
     debug = False
 
@@ -264,8 +474,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                                                     generate_mesh)
         local_nelements = local_mesh.nelements
 
+    print(f"{rank=},{local_nelements=},{global_nelements=}")
     if grid_only:
-        print(f"{rank=},{local_nelements=},{global_nelements=}")
         return 0
 
     from grudge.dof_desc import DISCR_TAG_BASE, DISCR_TAG_QUAD
@@ -291,9 +501,9 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     ones = discr.zeros(actx) + 1.0
 
+    print(f"{rank=},{local_nelements=},{global_nelements=}")
+    print(f"Discr: {nodes.shape=}")
     if discr_only:
-        print(f"{rank=},{local_nelements=},{global_nelements=}")
-        print(f"Discr: {nodes.shape=}")
         return 0
 
     vis_timer = None
@@ -324,8 +534,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     if single_gas_only:
         nspecies = 0
-        init_pressure = 101325
-        init_density = 1.0
         init_y = 0
     else:
         # {{{  Set up initial state using Cantera
@@ -342,7 +550,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
         # Initial temperature, pressure, and mixutre mole fractions are needed
         # set up the initial state in Cantera.
-        temperature_seed = 1500.0  # Initial temperature hot enough to burn
+        temperature_seed = init_temperature
         # Parameters for calculating the amounts of fuel, oxidizer, and inert species
         equiv_ratio = 1.0
         ox_di_ratio = 0.21
@@ -442,41 +650,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                          temperature=init_temperature,
                                          massfractions=init_y, velocity=velocity)
 
-    def _boundary_state_func(discr, btag, gas_model, actx, init_func, **kwargs):
-        bnd_discr = discr.discr_from_dd(btag)
-        nodes = thaw(bnd_discr.nodes(), actx)
-        return make_fluid_state(init_func(x_vec=nodes, eos=gas_model.eos,
-                                          **kwargs), gas_model)
-
-    # def quiescent(x_vec, eos, cv=None, **kwargs):
-    #    x = x_vec[0]
-    #    zeros = 0*x
-    #    rho = zeros + 1
-    #    velocity = make_obj_array([zeros for _ in range(dim)])
-    #    mom = rho*velocity
-    #    gamma = eos.gamma(cv)
-    #    rhoe = zeros + base_pressure / (gamma - 1)
-
-    #    return make_conserved(dim=dim, mass=rho, energy=rhoe,
-    #                          momentum=mom)
-
-    # initializer = quiescent
-    # exact = initializer(x_vec=nodes, eos=gas_model.eos)
-
-    # def _boundary_solution(discr, btag, gas_model, state_minus, **kwargs):
-    #     actx = state_minus.array_context
-    #     bnd_discr = discr.discr_from_dd(btag)
-    #     nodes = thaw(bnd_discr.nodes(), actx)
-    #    return make_fluid_state(initializer(x_vec=nodes, eos=gas_model.eos,
-    #                                        cv=state_minus.cv, **kwargs), gas_model)
-
-    #    boundaries = {DTAG_BOUNDARY("-1"):
-    #                  PrescribedFluidBoundary(boundary_state_func=_boundary_solution),
-    #                  DTAG_BOUNDARY("+1"):
-    #                  PrescribedFluidBoundary(boundary_state_func=_boundary_solution),
-    #                  DTAG_BOUNDARY("-2"): AdiabaticNoslipMovingBoundary(),
-    #                  DTAG_BOUNDARY("+2"): AdiabaticNoslipMovingBoundary()}
-
     from mirgecom.boundary import (
         AdiabaticNoslipWallBoundary,
         IsothermalWallBoundary
@@ -492,6 +665,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         boundaries = {}  # For periodic, also set above in meshgen
     else:
         boundaries = {BTAG_ALL: wall}
+
+    if boundary_report:
+        from mirgecom.simutil import boundary_report
+        boundary_report(discr, boundaries, f"{casename}_boundaries_np{nparts}.yaml")
 
     if rst_filename:
         current_step = rst_step
@@ -646,14 +823,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     compute_cfl = actx.compile(get_cfl)
 
-    # compute_production_rates = None
-    # if inert_only == 0:
-    #
-    #    def get_production_rates(cv, temperature):
-    #        return eos.get_production_rates(cv, temperature)
-    #
-    #    compute_production_rates = actx.compile(get_production_rates)
-
     def my_get_timestep(t, dt, state):
         #  richer interface to calculate {dt,cfl} returns node-local estimates
         t_remaining = max(0, t_final - t)
@@ -675,23 +844,13 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         cv, tseed = state
         fluid_state = construct_fluid_state(cv, tseed)
         dv = fluid_state.dv
-        # ns_rhs, grad_cv, grad_t = ns_operator(discr, state=fluid_state, time=t,
-        #                                       boundaries=boundaries,
-        #                                       gas_model=gas_model,
-        #                                       quadrature_tag=quadrature_tag,
-        #                                       return_gradients=True)
-
-        # euler_rhs = euler_operator(discr, state=fluid_state, time=t,
-        #                            boundaries=boundaries, gas_model=gas_model,
-        #                            quadrature_tag=quadrature_tag)
-        # chem_rhs = eos.get_species_source_terms(cv, fluid_state.temperature)
 
         try:
 
             if logmgr:
                 logmgr.tick_before()
 
-            if simulation_run:
+            if do_checkpoint:
                 from mirgecom.simutil import check_step
                 do_viz = check_step(step=step, interval=nviz)
                 do_restart = check_step(step=step, interval=nrestart)
@@ -721,15 +880,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         except MyRuntimeError:
             if rank == 0:
                 logger.info("Errors detected; attempting graceful exit.")
-            # my_write_viz(step=step, t=t, dt=dt, state=cv)
-            # my_write_restart(step=step, t=t, state=fluid_state)
             raise
 
         return state, dt
 
     def my_post_step(step, t, dt, state):
         cv, tseed = state
-        # fluid_state = construct_fluid_state(cv, tseed)
+        # this is where the seed is updated step-to-step
+        fluid_state = construct_fluid_state(cv, tseed)
 
         # Logmgr needs to know about EOS, dt, dim?
         # imo this is a design/scope flaw
@@ -739,7 +897,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                 set_sim_state(logmgr, dim, cv, gas_model.eos)
             logmgr.tick_after()
 
-        return state, dt
+        return make_obj_array([cv, fluid_state.temperature]), dt
 
     from mirgecom.inviscid import inviscid_flux_rusanov
 
@@ -802,21 +960,9 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     final_cv, tseed = current_state
     final_fluid_state = construct_fluid_state(final_cv, tseed)
     final_dv = final_fluid_state.dv
-    # final_dm = compute_production_rates(final_cv, final_dv.temperature)
     ts_field, cfl, dt = my_get_timestep(t=current_t, dt=current_dt,
                                         state=final_fluid_state)
 
-    # ns_rhs, grad_cv, grad_t = ns_operator(discr, state=final_fluid_state,
-    #                                       time=current_t,
-    #                                       boundaries=boundaries,
-    #                                       gas_model=gas_model,
-    #                                       quadrature_tag=quadrature_tag,
-    #                                       return_gradients=True)
-
-    # euler_rhs = euler_operator(discr, state=final_fluid_state, time=current_t,
-    #             boundaries=boundaries, gas_model=gas_model,
-    #                           quadrature_tag=quadrature_tag)
-    # chem_rhs=eos.get_species_source_terms(final_cv, final_fluid_state.temperature)
     my_write_viz(step=current_step, t=current_t, dt=dt, cv=final_cv, dv=final_dv,
                  ts_field=ts_field)
     my_write_status(dt=dt, cfl=cfl, dv=final_dv)
@@ -845,6 +991,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=f"MIRGE-Com Example: {casename}")
     parser.add_argument("--overintegration", action="store_true",
         help="use overintegration in the RHS computations")
+    parser.add_argument("-i", "--input_file", type=ascii, dest="input_file",
+                        nargs="?", action="store", help="simulation config file")
     parser.add_argument("--lazy", action="store_true",
         help="switch to a lazy computation mode")
     parser.add_argument("--profiling", action="store_true",
@@ -874,7 +1022,14 @@ if __name__ == "__main__":
     if args.restart_file:
         rst_filename = args.restart_file
 
-    main(use_logmgr=args.log, use_leap=args.leap,
+    input_file = None
+    if args.input_file:
+        input_file = args.input_file.replace("'", "")
+        print(f"Reading user input from file: {input_file}")
+    else:
+        print("No user input file, using default values")
+
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
          use_overintegration=args.overintegration,
          use_profiling=args.profiling, lazy=lazy,
          casename=casename, rst_filename=rst_filename, actx_class=actx_class,
