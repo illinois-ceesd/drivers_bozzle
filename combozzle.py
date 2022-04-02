@@ -1,4 +1,4 @@
-"""Demonstrate combustive mixture with Pyrometheus."""
+"""Prediction-adjacent performance tester."""
 
 __copyright__ = """
 Copyright (C) 2020 University of Illinois Board of Trustees
@@ -60,7 +60,10 @@ from mirgecom.eos import (
 from mirgecom.transport import SimpleTransport
 from mirgecom.gas_model import GasModel
 from arraycontext import thaw
-
+from mirgecom.artificial_viscosity import (
+    av_laplacian_operator, 
+    smoothness_indicator
+)
 from mirgecom.logging_quantities import (
     initialize_logmgr,
     logmgr_add_many_discretization_quantities,
@@ -94,6 +97,61 @@ def _get_box_mesh(dim, a, b, n, t=None, periodic=None):
     return gen(a=a, b=b, n=n, boundary_tag_to_face=bttf, mesh_type=t,
                periodic=periodic)
 
+
+class InitSponge:
+    r"""Solution initializer for flow in the ACT-II facility
+
+    This initializer creates a physics-consistent flow solution
+    given the top and bottom geometry profiles and an EOS using isentropic
+    flow relations.
+
+    The flow is initialized from the inlet stagnations pressure, P0, and
+    stagnation temperature T0.
+
+    geometry locations are linearly interpolated between given data points
+
+    .. automethod:: __init__
+    .. automethod:: __call__
+    """
+    def __init__(self, *, x0, thickness, amplitude):
+        r"""Initialize the sponge parameters.
+
+        Parameters
+        ----------
+        x0: float
+            sponge starting x location
+        thickness: float
+            sponge extent
+        amplitude: float
+            sponge strength modifier
+        """
+
+        self._x0 = x0
+        self._thickness = thickness
+        self._amplitude = amplitude
+
+    def __call__(self, x_vec, *, time=0.0):
+        """Create the sponge intensity at locations *x_vec*.
+
+        Parameters
+        ----------
+        x_vec: numpy.ndarray
+            Coordinates at which solution is desired
+        time: float
+            Time at which solution is desired. The strength is (optionally)
+            dependent on time
+        """
+        xpos = x_vec[0]
+        actx = xpos.array_context
+        zeros = 0*xpos
+        x0 = zeros + self._x0
+
+        return self._amplitude * actx.np.where(
+            actx.np.greater(xpos, x0),
+            (zeros + ((xpos - self._x0)/self._thickness) *
+            ((xpos - self._x0)/self._thickness)),
+            zeros + 0.0
+        )
 
 @mpi_entry_point
 def main(ctx_factory=cl.create_some_context, use_logmgr=True,
@@ -141,9 +199,9 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     y_scale = 1
     z_scale = 1
     chlen = .25
-    domain_xlen = 1
-    domain_ylen = 1
-    domain_zlen = 1
+    domain_xlen = 1.
+    domain_ylen = 1.
+    domain_zlen = 1.
 
     # {{{ Time stepping control
 
@@ -176,6 +234,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     dummy_rhs_only = 0
     timestepping_on = 1
+    av_on = 1
+    sponge_on = 1
     adiabatic_boundary = 0
     periodic_boundary = 1
     grid_only = 0
@@ -188,6 +248,15 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     n_refine = 1
     weak_scale = 1
     periodic = (periodic_boundary == 1,)*dim
+
+    # av parameters
+    alpha_sc = 0.5
+    s0_sc = -5.0
+    kappa_sc = 0.5
+    # sponge parameters
+    sponge_thickness = 0.09
+    sponge_amp = 1.0/current_dt/1000.
+    sponge_x0 = 0.9
 
     if input_file:
         input_data = None
@@ -296,6 +365,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         except KeyError:
             pass
         try:
+            av_on = int(input_data["artificial_viscosity_on"])
+        except KeyError:
+            pass
+        try:
+            sponge_on = int(input_data["sponge_on"])
+        except KeyError:
+            pass
+        try:
             logDependent = int(input_data["log_dependent"])
             log_dependent = logDependent > 0
         except KeyError:
@@ -306,6 +383,18 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             pass
         try:
             t_final = float(input_data["t_final"])
+        except KeyError:
+            pass
+        try:
+            sponge_thickness = float(input_data["sponge_thickness"])
+        except KeyError:
+            pass
+        try:
+            sponge_amp = float(input_data["sponge_amp"])
+        except KeyError:
+            pass
+        try:
+            sponge_x0 = float(input_data["sponge_x0"])
         except KeyError:
             pass
         try:
@@ -366,6 +455,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         print(f"\t{single_gas_only=},{dummy_rhs_only=}")
         print(f"\t{periodic_boundary=},{adiabatic_boundary=}")
         print(f"\t{timestepping_on=}, {inviscid_only=}")
+        print(f"\t{av_on=}, {sponge_on=}")
         print(f"\t{nspecies=}")
         print("---- timestepping ------")
         print(f"\tcurrent_dt = {current_dt}")
@@ -393,8 +483,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         print(f"\tchar_len = {chlen}")
         print(f"\torder = {order}")
 
-        # print(f"\tShock capturing parameters: alpha {alpha_sc}, "
-        #      f"s0 {s0_sc}, kappa {kappa_sc}")
+        if av_on:
+            print(f"\tShock capturing parameters: {alpha_sc=}, "
+                  f" {s0_sc=}, {kappa_sc=}")
+
+        if sponge_on:
+            print(f"Sponge parameters: {sponge_amp=}, {sponge_thickness=},"
+                  f" {sponge_x0=}")
+
         if log_dependent:
             print("\tDependent variable logging is ON.")
         else:
@@ -415,9 +511,11 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     ncx = int(xsize / chlen)
     ncy = int(ysize / chlen)
     ncz = int(zsize / chlen)
-    npts_x = ncx * n_refine
-    npts_y = ncy * n_refine
-    npts_z = ncz * n_refine
+
+    npts_x = ncx * n_refine + 1
+    npts_y = ncy * n_refine + 1
+    npts_z = ncz * n_refine + 1
+
     x0 = xsize/2
     y0 = ysize/2
     z0 = zsize/2
@@ -429,18 +527,22 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     zback = z0 - zsize/2
     zfront = z0 + zsize/2
 
-    if dim == 1:
-        npts_axis = (npts_x,)
-        box_ll = (xleft,)
-        box_ur = (xright,)
-    elif dim == 2:
+    npts_axis = (npts_x,)
+    box_ll = (xleft,)
+    box_ur = (xright,)
+    if dim > 1:
         npts_axis = (npts_x, npts_y)
         box_ll = (xleft, ybottom)
         box_ur = (xright, ytop)
-    else:
+    if dim > 2:
         npts_axis = (npts_x, npts_y, npts_z)
         box_ll = (xleft, ybottom, zback)
         box_ur = (xright, ytop, zfront)
+
+    if rank == 0:
+        print(f"---- Mesh generator inputs -----\n"
+              f"\tDomain: [{box_ll}, {box_ur}], {periodic=}\n"
+              f"\tNpts/axis: {npts_axis}")
 
     if single_gas_only:
         inert_only = 1
@@ -494,6 +596,19 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     nodes = thaw(discr.nodes(), actx)
     ones = discr.zeros(actx) + 1.0
 
+    def vol_min(x):
+        from grudge.op import nodal_min
+        return actx.to_numpy(nodal_min(discr, "vol", x))[()]
+
+    def vol_max(x):
+        from grudge.op import nodal_max
+        return actx.to_numpy(nodal_max(discr, "vol", x))[()]
+
+    from grudge.dt_utils import characteristic_lengthscales
+    length_scales = characteristic_lengthscales(actx, discr)
+    h_min = vol_min(length_scales)
+    h_max = vol_max(length_scales)
+
     if use_overintegration:
         quadrature_tag = DISCR_TAG_QUAD
     else:
@@ -501,8 +616,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     ones = discr.zeros(actx) + 1.0
 
-    print(f"{rank=},{local_nelements=},{global_nelements=}")
-    print(f"Discr: {nodes.shape=}")
+    if rank == 0:
+        print(f"----- Discretization info ----")
+        print(f"Discr: {nodes.shape=}, {h_min=}, {h_max=}")
+    for i in range(nparts):
+        if rank == i:
+            print(f"{rank=},{local_nelements=},{global_nelements=}")
+        comm.Barrier()
+
     if discr_only:
         return 0
 
@@ -701,6 +822,15 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     current_dv = current_fluid_state.dv
     temperature_seed = current_dv.temperature
 
+    if sponge_on:
+        sponge_sigma = InitSponge(x0=sponge_x0, thickness=sponge_thickness,
+                                 amplitude=sponge_amp)(x_vec=nodes)
+        sponge_ref_cv = initializer(eos=gas_model.eos, x_vec=nodes)
+
+        # sponge function
+        def _sponge(cv):
+            return sponge_sigma*(sponge_ref_cv - cv)
+
     # Inspection at physics debugging time
     if debug:
         print("Initial MIRGE-Com state:")
@@ -757,9 +887,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         if rank == 0:
             logger.info(status_msg)
 
-    def my_write_viz(step, t, dt, cv, ts_field, dv):
-        viz_fields = [("cv", cv), ("dv", dv),
-                      ("dt" if constant_cfl else "cfl", ts_field)]
+    def my_write_viz(step, t, cv, dv):
+        viz_fields = [("cv", cv), ("dv", dv)]
         write_visfile(discr, viz_fields, visualizer, vizname=casename,
                       step=step, t=t, overwrite=True, vis_timer=vis_timer)
 
@@ -813,37 +942,16 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         get_viscous_cfl
     )
 
-    def get_dt(state):
-        return get_viscous_timestep(discr, state=state)
-
-    compute_dt = actx.compile(get_dt)
-
-    def get_cfl(state, dt):
-        return get_viscous_cfl(discr, dt=dt, state=state)
-
-    compute_cfl = actx.compile(get_cfl)
-
-    def my_get_timestep(t, dt, state):
-        #  richer interface to calculate {dt,cfl} returns node-local estimates
-        t_remaining = max(0, t_final - t)
-
-        if constant_cfl:
-            ts_field = current_cfl * compute_dt(state)
-            from grudge.op import nodal_min_loc
-            dt = global_reduce(actx.to_numpy(nodal_min_loc(discr, "vol", ts_field)),
-                               op="min")
-            cfl = current_cfl
-        else:
-            ts_field = compute_cfl(state, current_dt)
-            from grudge.op import nodal_max_loc
-            cfl = global_reduce(actx.to_numpy(nodal_max_loc(discr, "vol", ts_field)),
-                                op="max")
-        return ts_field, cfl, min(t_remaining, dt)
+    def compute_av_alpha_field(state):
+        """ Scale alpha by the element characteristic length """
+        return alpha_sc*state.speed*length_scales
 
     def my_pre_step(step, t, dt, state):
         cv, tseed = state
         fluid_state = construct_fluid_state(cv, tseed)
         dv = fluid_state.dv
+        dt = get_sim_timestep(discr, fluid_state, t=t, dt=dt, cfl=current_cfl,
+                              t_final=t_final, constant_cfl=constant_cfl)
 
         try:
 
@@ -864,8 +972,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                             logger.info("Fluid solution failed health check.")
                         raise MyRuntimeError("Failed simulation health check.")
 
-                ts_field, cfl, dt = my_get_timestep(t=t, dt=dt, state=fluid_state)
-
                 if do_status:
                     my_write_status(dt=dt, cfl=cfl, dv=dv)
 
@@ -874,8 +980,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                  temperature_seed=tseed)
 
                 if do_viz:
-                    my_write_viz(step=step, t=t, dt=dt, cv=cv, dv=dv,
-                                 ts_field=ts_field)
+                    my_write_viz(step=step, t=t, cv=cv, dv=dv)
 
         except MyRuntimeError:
             if rank == 0:
@@ -923,7 +1028,22 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         else:
             chem_rhs = eos.get_species_source_terms(cv, fluid_state.temperature)
 
-        fluid_rhs = fluid_rhs + chem_rhs
+        if av_on:
+            alpha_f = compute_av_alpha_field(fluid_state)
+            av_rhs = av_laplacian_operator(discr, fluid_state=fluid_state,
+                                           boundaries=boundaries,
+                                           boundary_kwargs={"time": t,
+                                                            "gas_model": gas_model},
+                                           alpha=alpha_f, s0=s0_sc, kappa=kappa_sc)
+        else:
+            av_rhs = 0*fluid_rhs
+
+        if sponge_on:
+            sponge_rhs = _sponge(fluid_state.cv)
+        else:
+            sponge_rhs = 0*fluid_rhs
+
+        fluid_rhs = fluid_rhs + chem_rhs + av_rhs + sponge_rhs
         tseed_rhs = 0*tseed
         return make_obj_array([fluid_rhs, tseed_rhs])
 
@@ -960,12 +1080,11 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     final_cv, tseed = current_state
     final_fluid_state = construct_fluid_state(final_cv, tseed)
     final_dv = final_fluid_state.dv
-    ts_field, cfl, dt = my_get_timestep(t=current_t, dt=current_dt,
-                                        state=final_fluid_state)
+    dt = get_sim_timestep(discr, final_fluid_state, current_t, current_dt,
+                                  current_cfl, t_final, constant_cfl)
 
-    my_write_viz(step=current_step, t=current_t, dt=dt, cv=final_cv, dv=final_dv,
-                 ts_field=ts_field)
-    my_write_status(dt=dt, cfl=cfl, dv=final_dv)
+    my_write_viz(step=current_step, t=current_t, cv=final_cv, dv=final_dv)
+    my_write_status(dt=dt, cfl=current_cfl, dv=final_dv)
     my_write_restart(step=current_step, t=current_t, state=final_fluid_state,
                      temperature_seed=tseed)
 
