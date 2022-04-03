@@ -174,34 +174,16 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     from mirgecom.simutil import global_reduce as _global_reduce
     global_reduce = partial(_global_reduce, comm=comm)
 
-    logmgr = initialize_logmgr(use_logmgr,
-        filename=f"{casename}.sqlite", mode="wu", mpi_comm=comm)
-
-    if use_profiling:
-        queue = cl.CommandQueue(cl_ctx,
-            properties=cl.command_queue_properties.PROFILING_ENABLE)
-    else:
-        queue = cl.CommandQueue(cl_ctx)
-
-    if lazy:
-        actx = actx_class(comm, queue, mpi_base_tag=12000,
-                allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
-    else:
-        actx = actx_class(comm, queue,
-                allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)),
-                force_device_scalars=True)
-
     # Some discretization parameters
     dim = 3
-    # nel_1d = 8
     order = 1
     x_scale = 1
     y_scale = 1
     z_scale = 1
-    chlen = .25
     domain_xlen = 1.
     domain_ylen = 1.
     domain_zlen = 1.
+    chlen = .25  # default to 4 elements/axis = x_len/chlen
 
     # {{{ Time stepping control
 
@@ -228,7 +210,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     # }}}  Time stepping control
 
-    init_temperature = 1500.
+    init_temperature = 700.
     init_pressure = 101325.
     init_density = 1.0
 
@@ -247,7 +229,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     n_refine = 1
     weak_scale = 1
-    periodic = (periodic_boundary == 1,)*dim
 
     # av parameters
     alpha_sc = 0.5
@@ -539,6 +520,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         box_ll = (xleft, ybottom, zback)
         box_ur = (xright, ytop, zfront)
 
+    periodic = (periodic_boundary == 1,)*dim
     if rank == 0:
         print(f"---- Mesh generator inputs -----\n"
               f"\tDomain: [{box_ll}, {box_ur}], {periodic=}\n"
@@ -549,8 +531,21 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     wall_temperature = init_temperature
     temperature_seed = init_temperature
-
     debug = False
+
+    if use_profiling:
+        queue = cl.CommandQueue(cl_ctx,
+            properties=cl.command_queue_properties.PROFILING_ENABLE)
+    else:
+        queue = cl.CommandQueue(cl_ctx)
+
+    if lazy:
+        actx = actx_class(comm, queue, mpi_base_tag=12000,
+                allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)))
+    else:
+        actx = actx_class(comm, queue,
+                allocator=cl_tools.MemoryPool(cl_tools.ImmediateAllocator(queue)),
+                force_device_scalars=True)
 
     rst_path = "restart_data/"
     rst_pattern = (
@@ -628,6 +623,11 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         return 0
 
     vis_timer = None
+
+    casename = f"{casename}-d{dim}p{order}e{global_nelements}n{nparts}"
+
+    logmgr = initialize_logmgr(use_logmgr,
+        filename=f"{casename}.sqlite", mode="wu", mpi_comm=comm)
 
     if logmgr:
         logmgr_add_cl_device_info(logmgr, queue)
@@ -1092,6 +1092,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         logmgr.close()
     elif use_profiling:
         print(actx.tabulate_profiling_data())
+
+    comm.Barrier()
 
     finish_tol = 1e-16
     assert np.abs(current_t - t_final) < finish_tol
