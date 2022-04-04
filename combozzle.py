@@ -246,6 +246,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                 input_data = yaml.load(f, Loader=yaml.FullLoader)
         input_data = comm.bcast(input_data, root=0)
         try:
+            dim = int(input_data["dim"])
+        except KeyError:
+            pass
+        try:
             domain_xlen = float(input_data["domain_xlen"])
         except KeyError:
             pass
