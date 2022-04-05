@@ -3,7 +3,7 @@
 export PYOPENCL_CTX="port:tesla"
 export XDG_CACHE_HOME="/tmp/$USER/xdg-scratch"
 export POCL_CACHE_DIR_ROOT="/tmp/$USER/pocl-cache"
-export EMIRGE_HOME="/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge"
+export EMIRGE_HOME="/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion"
 
 nnodes=$(echo $LSB_MCPU_HOSTS | wc -w)
 nnodes=$((nnodes/2-1))
