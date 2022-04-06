@@ -1,0 +1,1 @@
+../scripts/weak_scale_lazy_bsub.sh

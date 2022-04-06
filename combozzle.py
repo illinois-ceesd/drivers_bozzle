@@ -242,9 +242,15 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     if input_file:
         input_data = None
         if rank == 0:
+            print(f"Reading user input file: {input_file}.")
             with open(input_file) as f:
                 input_data = yaml.load(f, Loader=yaml.FullLoader)
         input_data = comm.bcast(input_data, root=0)
+
+        try:
+            casename = input_data["casename"]  # fixme: allow cl override
+        except KeyError:
+            pass
         try:
             dim = int(input_data["dim"])
         except KeyError:
@@ -435,6 +441,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     if rank == 0:
         print("#### Simluation control data: ####")
+        print(f"\tCasename: {casename}")
         print(f"----- run control ------")
         print(f"\t{grid_only=},{discr_only=},{inert_only=}")
         print(f"\t{single_gas_only=},{dummy_rhs_only=}")
@@ -575,7 +582,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                                                     generate_mesh)
         local_nelements = local_mesh.nelements
 
-    print(f"{rank=},{local_nelements=},{global_nelements=}")
+    print(f"{rank=},{dim=},{order=},{local_nelements=},{global_nelements=}")
     if grid_only:
         return 0
 
@@ -617,7 +624,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     if rank == 0:
         print(f"----- Discretization info ----")
-        print(f"Discr: {nodes.shape=}, {h_min=}, {h_max=}")
+        print(f"Discr: {nodes.shape=}, {order=}, {h_min=}, {h_max=}")
     for i in range(nparts):
         if rank == i:
             print(f"{rank=},{local_nelements=},{global_nelements=}")

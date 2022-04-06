@@ -1,0 +1,120 @@
+[mtcampbe@lassen30:3d]$ pwd
+/g/g17/mtcampbe/ceesd-timing/drivers_bozzle/dist_scale/3d
+[mtcampbe@lassen30:3d]$ rm run_config.yaml 
+[mtcampbe@lassen30:3d]$ ln -s run_config/weak_8.yaml ./run_config.yaml
+[mtcampbe@lassen30:3d]$ jsrun -g 1 -a 1 -n 8 bash -c 'POCL_CACHE_DIR=$POCL_CACHE_DIR_ROOT/$$ python -O -m mpi4py ./combozzle.py -i run_config.yaml'
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+( .... ) after a while and many msgs
+build program: kernel 'axpbyz' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'axpbyz' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'if_positive' was part of a lengthy source build resulting from a binary cache miss (0.55 s)
+build program: kernel 'axpbyz' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'axpbyz' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+build program: kernel 'if_positive' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'if_positive' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'if_positive' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+build program: kernel 'if_positive' was part of a lengthy source build resulting from a binary cache miss (0.50 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.65 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.68 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.69 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.73 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.78 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.59 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.64 s)
+[lassen30:57601] *** Process received signal ***
+[lassen30:57601] Signal: Segmentation fault (11)
+[lassen30:57601] Signal code: Address not mapped (1)
+[lassen30:57601] Failing at address: 0x10419d260
+<< Rank 6: Generating lwcore_cpu.3434071_2.6 on lassen30 Wed Apr  6 10:19:55 PDT 2022 (LLNL_COREDUMP_FORMAT_CPU=lwcore) >>
+<< Rank 6:  Generated lwcore_cpu.3434071_2.6 on lassen30 Wed Apr  6 10:19:58 PDT 2022 in 3 secs >>
+<< Rank 6: Waiting 60 secs before aborting task on lassen30 Wed Apr  6 10:19:58 PDT 2022 (LLNL_COREDUMP_WAIT_FOR_OTHERS=60) >>
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1164, in <module>
+build program: kernel 'scalar_comparison_kernel' was part of a lengthy source build resulting from a binary cache miss (0.55 s)
+    exec(code, run_globals)
+  File "./combozzle.py", line 1164, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 680, in main
+    func(*args, **kwargs)
+  File "./combozzle.py", line 680, in main
+    cantera_soln = cantera.Solution(phase_id="gas", source=mech_cti)
+  File "interfaces/cython/cantera/base.pyx", line 59, in cantera._cantera._SolutionBase.__cinit__
+    cantera_soln = cantera.Solution(phase_id="gas", source=mech_cti)
+  File "interfaces/cython/cantera/base.pyx", line 59, in cantera._cantera._SolutionBase.__cinit__
+  File "interfaces/cython/cantera/base.pyx", line 160, in cantera._cantera._SolutionBase._init_cti_xml
+  File "interfaces/cython/cantera/base.pyx", line 160, in cantera._cantera._SolutionBase._init_cti_xml
+cantera._cantera.CanteraError: 
+***********************************************************************
+CanteraError thrown by call_ctml_writer:
+Error executing python while converting input file:
+Python command was: '/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/bin/python'
+exec_stream_t::start: timeout while waiting for child to report via status_pipe
+Success
+[code 0x0000 ()]
+***********************************************************************
+
+cantera._cantera.CanteraError: 
+***********************************************************************
+CanteraError thrown by call_ctml_writer:
+Error executing python while converting input file:
+Python command was: '/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/bin/python'
+exec_stream_t::start: timeout while waiting for child to report via status_pipe
+Success
+[code 0x0000 ()]
+***********************************************************************
+
+Reading user input from file: run_config.yaml
+rank=7,dim=3,order=3,local_nelements=49152,global_nelements=393216
+rank=7,local_nelements=49152,global_nelements=393216
+Reading user input from file: run_config.yaml
+rank=6,dim=3,order=3,local_nelements=49152,global_nelements=393216
+rank=6,local_nelements=49152,global_nelements=393216
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 7 in communicator MPI_COMM_WORLD
+with errorcode 1.
