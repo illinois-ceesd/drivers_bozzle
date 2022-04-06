@@ -1,0 +1,11 @@
+  979  sed -i '.bak
+  980  sed -i '.bak' 's/order\: 1/order\: 3' case_p1s1.yaml
+  981  sed -i '.bak' 's/order\: 1/order\: 3/g' case_p1s1.yaml
+  982  sed -i 's/order\: 1/order\: 3/g' case_p1s1.yaml
+  985  sed -i 's/order\: 1/order\: 3/g' case_p1*yaml
+  987  sed -i 's/order\: 2/order\: 4/g' case_p1*yaml
+ 1017  history | grep sed
+ 1018  sed -i 's/order\: 2/order\: 4/g' case_p2*yaml
+ 1019  sed -i 's/order\: 3/order\: 5/g' case_p1*yaml
+ 1021  history | grep sed > change_order
+ 1040  history | grep sed > change_order

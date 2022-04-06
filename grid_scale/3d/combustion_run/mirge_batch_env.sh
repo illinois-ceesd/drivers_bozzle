@@ -1,0 +1,1 @@
+../../scripts/mirge_batch_env.sh

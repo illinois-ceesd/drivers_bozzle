@@ -1,0 +1,2967 @@
+Customizing shell for Lassen.
+Customizing shell for Lassen.
+Activating 'timing.fusion' environment for '/g/g17/mtcampbe/ceesd-timing/emirge.fusion/miniforge3/bin/conda'.
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s1.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:138225] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649218518.236441] [lassen67:138225:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+[lassen67:138225] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:138225] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=384)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=384)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=384)}))), shape=(384, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'e': EinsumElementwiseAxis(dim=0), 'j': EinsumReductionAxis(dim=0), 'i': EinsumElementwiseAxis(dim=1)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s1.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)], periodic=(True, True, True)
+	Npts/axis: (5, 5, 5)
+rank=0,local_nelements=384,global_nelements=384
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s1024.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:138908] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:138908] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:138908] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649218524.787596] [lassen67:138908:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=393216)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=393216)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=393216)}))), shape=(393216, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'j': EinsumReductionAxis(dim=0), 'e': EinsumElementwiseAxis(dim=0), 'i': EinsumElementwiseAxis(dim=1)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s1024.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 2.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (16.0, 8.0, 8.0)], periodic=(True, True, True)
+	Npts/axis: (65, 33, 33)
+rank=0,local_nelements=393216,global_nelements=393216
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s128.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:141770] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:141770] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:141770] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649218792.558523] [lassen67:141770:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=49152)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=49152)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=49152)}))), shape=(49152, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'i': EinsumElementwiseAxis(dim=1), 'j': EinsumReductionAxis(dim=0), 'e': EinsumElementwiseAxis(dim=0)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s128.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 2.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 4.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (33, 17, 17)
+rank=0,local_nelements=49152,global_nelements=49152
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s256.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:142335] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:142335] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:142335] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649218828.094925] [lassen67:142335:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=98304)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=98304)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=98304)}))), shape=(98304, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'i': EinsumElementwiseAxis(dim=1), 'j': EinsumReductionAxis(dim=0), 'e': EinsumElementwiseAxis(dim=0)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s256.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 2.0
+	domain_ylen = 1.0
+	y_scale = 2.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 8.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (33, 33, 17)
+rank=0,local_nelements=98304,global_nelements=98304
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s512.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:143189] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:143189] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:143189] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649218896.780785] [lassen67:143189:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=196608)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=196608)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=196608)}))), shape=(196608, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'j': EinsumReductionAxis(dim=0), 'e': EinsumElementwiseAxis(dim=0), 'i': EinsumElementwiseAxis(dim=1)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s512.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 8.0, 8.0)], periodic=(True, True, True)
+	Npts/axis: (33, 33, 33)
+rank=0,local_nelements=196608,global_nelements=196608
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s64.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:144783] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:144783] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:144783] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649219031.086990] [lassen67:144783:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=24576)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=24576)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=24576)}))), shape=(24576, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'e': EinsumElementwiseAxis(dim=0), 'j': EinsumReductionAxis(dim=0), 'i': EinsumElementwiseAxis(dim=1)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+Reading user input from file: ./run_config/case_p1s64.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (4.0, 4.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (17, 17, 17)
+rank=0,local_nelements=24576,global_nelements=24576
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p1s8.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:145166] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:145166] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:145166] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649219050.232006] [lassen67:145166:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 279, in freeze
+    pt_prg = self._freeze_prg_cache[normalized_expr]
+KeyError: DictOfNamedArrays({'_actx_out': Einsum(access_descriptors=((EinsumElementwiseAxis(dim=1), EinsumReductionAxis(dim=0)), (EinsumElementwiseAxis(dim=0), EinsumReductionAxis(dim=0))), args=(Placeholder(axes=(Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=3072)})), Axis(tags=frozenset())), shape=(56, 4), dtype='float64', name='_actx_dw'), Placeholder(axes=(Axis(tags=frozenset({DiscretizationElementAxisTag(ndim=3, nelements=3072)})), Axis(tags=frozenset({DiscretizationDOFAxisTag(ndim=3, nelements=3072)}))), shape=(3072, 4), dtype='float64', name='_actx_dw_0')), redn_descr_to_redn_dim={EinsumReductionAxis(dim=0): ReductionDim(tags=frozenset())}, index_to_access_descr={'e': EinsumElementwiseAxis(dim=0), 'j': EinsumReductionAxis(dim=0), 'i': EinsumElementwiseAxis(dim=1)})})
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1157, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 595, in main
+    nodes = thaw(discr.nodes(), actx)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/discretization.py", line 740, in nodes
+    return self.discr_from_dd(dd).nodes()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 679, in nodes
+    result = make_obj_array([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 680, in <listcomp>
+    _DOFArray(None, tuple([
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/discretization/__init__.py", line 681, in <listcomp>
+    actx.freeze(resample_mesh_nodes(grp, iaxis)) for grp in self.groups
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 291, in freeze
+    pt_prg = pt_prg.with_transformed_program(self.transform_loopy_program)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 124, in with_transformed_program
+    return self.copy(program=f(self.program))
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 1630, in transform_loopy_program
+    l_one_size, l_zero_size = _get_group_size_for_dof_array_loop(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py", line 899, in _get_group_size_for_dof_array_loop
+    raise NotImplementedError(nunit_dofs)
+NotImplementedError: {56}
+Reading user input from file: ./run_config/case_p1s8.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 5
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (2.0, 2.0, 2.0)], periodic=(True, True, True)
+	Npts/axis: (9, 9, 9)
+rank=0,local_nelements=3072,global_nelements=3072
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s1.yaml --lazy
+./combozzle.py:1133: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:145411] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:145411] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:145411] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649219054.973296] [lassen67:145411:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:586: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+preprocess_program on '_pt_kernel': completed (7.53s wall 0.02x CPU)
+_pt_kernel: generate code: completed (0.54s wall 0.50x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.04 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+_pt_kernel: generate code: completed (0.51s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.47 s)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.86s wall 1.00x CPU)
+Loop Fusion: completed (0.93s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.87 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.87 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (0.87 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.65s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+Unification converged after 0 iterations.
+Array Contraction: Contracting 0 temps
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.60 s)
+Unification converged after 0 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.62s wall 1.00x CPU)
+transform_loopy_program: completed (1.73s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.34s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.62 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (0.84 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.77s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.11s wall 1.00x CPU)
+Loop Fusion: completed (8.76s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.74s wall 1.00x CPU)
+Array Contraction: completed (4.20s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.89s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.37s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.18s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (40.84s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.45s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.reusing_data_wrappers: completed (0.59s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.50s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.73s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.47 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.47 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+transform_dag: completed (42.22s wall 1.00x CPU)
+generate_loopy: completed (79.12s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (153.44s wall 1.00x CPU)
+Loop Fusion: completed (157.78s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (398.07s wall 1.00x CPU)
+Array Contraction: completed (401.46s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.55s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (22.02s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.53s wall 1.00x CPU)
+_pt_kernel: check variable access ordered: completed (0.40s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.80s wall 1.00x CPU)
+transform_loopy_program: completed (642.96s wall 1.00x CPU)
+_pt_kernel: generate code: completed (24.89s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Reading user input from file: ./run_config/case_p2s1.yaml
+#### Simluation control data: ####
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)], periodic=(True, True, True)
+	Npts/axis: (5, 5, 5)
+rank=0,local_nelements=384,global_nelements=384
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.015526827616966757, h_max=0.018245066638953467
+rank=0,local_nelements=384,global_nelements=384
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+step = 0, sim time: 0.000000e+00 s
+------- step walltime: 939.979 s, log walltime: 0.000197887 s
+step = 1, sim time: 1.000000e-08 s
+------- step walltime: 0.0333855 s, log walltime: 0.000176668 s
+step = 2, sim time: 2.000000e-08 s
+------- step walltime: 0.0355289 s, log walltime: 9.39369e-05 s
+step = 3, sim time: 3.000000e-08 s
+------- step walltime: 0.0358839 s, log walltime: 9.41753e-05 s
+step = 4, sim time: 4.000000e-08 s
+------- step walltime: 0.0328751 s, log walltime: 9.72748e-05 s
+step = 5, sim time: 5.000000e-08 s
+------- step walltime: 0.0335946 s, log walltime: 9.48906e-05 s
+step = 6, sim time: 6.000000e-08 s
+------- step walltime: 0.0327883 s, log walltime: 9.53674e-05 s
+step = 7, sim time: 7.000000e-08 s
+------- step walltime: 0.0328147 s, log walltime: 0.000101328 s
+step = 8, sim time: 8.000000e-08 s
+------- step walltime: 0.0324967 s, log walltime: 0.000106096 s
+step = 9, sim time: 9.000000e-08 s
+------- step walltime: 0.0327666 s, log walltime: 0.000100851 s
+step = 10, sim time: 1.000000e-07 s
+------- step walltime: 0.0346289 s, log walltime: 0.000108242 s
+step = 11, sim time: 1.100000e-07 s
+------- step walltime: 0.0328355 s, log walltime: 9.9659e-05 s
+step = 12, sim time: 1.200000e-07 s
+------- step walltime: 0.0328913 s, log walltime: 0.000107288 s
+step = 13, sim time: 1.300000e-07 s
+------- step walltime: 0.0328796 s, log walltime: 9.98974e-05 s
+step = 14, sim time: 1.400000e-07 s
+------- step walltime: 0.032778 s, log walltime: 9.91821e-05 s
+step = 15, sim time: 1.500000e-07 s
+------- step walltime: 0.03476 s, log walltime: 9.799e-05 s
+step = 16, sim time: 1.600000e-07 s
+------- step walltime: 0.0328894 s, log walltime: 0.000100613 s
+step = 17, sim time: 1.700000e-07 s
+------- step walltime: 0.033622 s, log walltime: 9.98974e-05 s
+step = 18, sim time: 1.800000e-07 s
+------- step walltime: 0.0328472 s, log walltime: 0.000100613 s
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+step = 19, sim time: 1.900000e-07 s
+------- step walltime: 1.09046 s, log walltime: 9.98974e-05 s
+Checkpointing final state ...
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+----- cfl=0.05
+P(101325.0, 101325.0), T(1508.4191301832177, 1508.4191301832177)
+build program: kernel 'reduce_kernel_stage1' was part of a lengthy source build resulting from a binary cache miss (0.61 s)
+build program: kernel 'reduce_kernel_stage2' was part of a lengthy source build resulting from a binary cache miss (0.61 s)
+Unification converged after 0 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s128.yaml --lazy
+./combozzle.py:1138: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:156227] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:156227] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:156227] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649220075.478355] [lassen67:156227:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:591: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.79 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.57s wall 1.00x CPU)
+Loop Fusion: completed (0.63s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+_pt_kernel: generate code: completed (0.51s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.87s wall 1.00x CPU)
+Loop Fusion: completed (0.93s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.66s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 0 iterations.
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+Unification converged after 0 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.63s wall 1.00x CPU)
+transform_loopy_program: completed (1.73s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.34s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.62 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.37s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.76s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.20s wall 1.00x CPU)
+Loop Fusion: completed (8.85s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.76s wall 1.00x CPU)
+Array Contraction: completed (4.22s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.96s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.39s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.20s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.95 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.95 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.95 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (41.00s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.45s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.reusing_data_wrappers: completed (0.60s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.51s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.75s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+_pt_kernel: instantiate: completed (0.30s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+transform_dag: completed (42.45s wall 1.00x CPU)
+generate_loopy: completed (79.97s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (154.83s wall 1.00x CPU)
+Loop Fusion: completed (159.21s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (399.06s wall 1.00x CPU)
+Array Contraction: completed (402.46s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.54s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (21.92s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.27s wall 1.00x CPU)
+_pt_kernel: check variable access ordered: completed (0.47s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.89s wall 1.00x CPU)
+transform_loopy_program: completed (645.77s wall 1.00x CPU)
+_pt_kernel: generate code: completed (24.94s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.23 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Reading user input from file: ./run_config/case_p2s128.yaml
+#### Simluation control data: ####
+	Casename: {casename}
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 2.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 4.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (33, 17, 17)
+rank=0,local_nelements=49152,global_nelements=49152
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.015526827616964096, h_max=0.018245066638955344
+rank=0,local_nelements=49152,global_nelements=49152
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+step = 0, sim time: 0.000000e+00 s
+------- step walltime: 949.258 s, log walltime: 0.000204563 s
+step = 1, sim time: 1.000000e-08 s
+------- step walltime: 0.765451 s, log walltime: 0.000178576 s
+step = 2, sim time: 2.000000e-08 s
+------- step walltime: 0.777633 s, log walltime: 9.84669e-05 s
+step = 3, sim time: 3.000000e-08 s
+------- step walltime: 0.748668 s, log walltime: 0.000103951 s
+step = 4, sim time: 4.000000e-08 s
+------- step walltime:  0.775 s, log walltime: 0.000100374 s
+step = 5, sim time: 5.000000e-08 s
+------- step walltime: 0.738239 s, log walltime: 9.98974e-05 s
+step = 6, sim time: 6.000000e-08 s
+------- step walltime: 0.741728 s, log walltime: 0.000108719 s
+step = 7, sim time: 7.000000e-08 s
+------- step walltime: 0.740564 s, log walltime: 0.00011158 s
+step = 8, sim time: 8.000000e-08 s
+------- step walltime: 0.736775 s, log walltime: 0.000124216 s
+step = 9, sim time: 9.000000e-08 s
+------- step walltime: 0.791995 s, log walltime: 0.00011158 s
+step = 10, sim time: 1.000000e-07 s
+------- step walltime: 0.738433 s, log walltime: 0.000118494 s
+step = 11, sim time: 1.100000e-07 s
+------- step walltime: 0.740359 s, log walltime: 0.000107288 s
+step = 12, sim time: 1.200000e-07 s
+------- step walltime: 0.741284 s, log walltime: 0.000140667 s
+step = 13, sim time: 1.300000e-07 s
+------- step walltime:  0.741 s, log walltime: 0.000108957 s
+step = 14, sim time: 1.400000e-07 s
+------- step walltime: 0.759259 s, log walltime: 0.000108242 s
+step = 15, sim time: 1.500000e-07 s
+------- step walltime: 0.742992 s, log walltime: 0.000109911 s
+step = 16, sim time: 1.600000e-07 s
+------- step walltime: 0.743479 s, log walltime: 0.000113487 s
+step = 17, sim time: 1.700000e-07 s
+------- step walltime: 0.741804 s, log walltime: 0.000110626 s
+step = 18, sim time: 1.800000e-07 s
+------- step walltime: 0.740692 s, log walltime: 0.000110865 s
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.50 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+step = 19, sim time: 1.900000e-07 s
+------- step walltime: 1.82178 s, log walltime: 0.000109434 s
+Checkpointing final state ...
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.55 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.53 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+----- cfl=0.05
+P(-1082320.5375005868, 101375.63917113794), T(-16106.276791879685, 1508.610886127082)
+Unification converged after 0 iterations.
+rank=0: Invalid pressure data found.
+rank=0: Invalid temperature data found.
+Fluid solution failed health check.
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1162, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 1115, in main
+    raise MyRuntimeError("Failed simulation health check.")
+__main__.MyRuntimeError: Failed simulation health check.
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s256.yaml --lazy
+./combozzle.py:1138: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:167564] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:167564] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:167564] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649221120.126748] [lassen67:167564:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:591: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.79 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.57s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+_pt_kernel: generate code: completed (0.51s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.84s wall 1.00x CPU)
+Loop Fusion: completed (0.91s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.68s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 0 iterations.
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+Unification converged after 0 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.63s wall 1.00x CPU)
+transform_loopy_program: completed (1.73s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.31s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.62 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.82s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.09s wall 1.00x CPU)
+Loop Fusion: completed (8.73s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.77s wall 1.00x CPU)
+Array Contraction: completed (4.23s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.95s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.38s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.28s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.94 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.94 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.94 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (40.73s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.44s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.85s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.20s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+transform_dag: completed (41.90s wall 1.00x CPU)
+generate_loopy: completed (79.97s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (154.11s wall 1.00x CPU)
+Loop Fusion: completed (158.46s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (400.23s wall 1.00x CPU)
+Array Contraction: completed (403.63s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.54s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (22.18s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.29s wall 1.00x CPU)
+_pt_kernel: check variable access ordered: completed (0.37s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.88s wall 1.00x CPU)
+transform_loopy_program: completed (645.19s wall 1.00x CPU)
+_pt_kernel: generate code: completed (25.52s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.02 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1162, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 1079, in main
+    advance_state(rhs=my_rhs, timestepper=timestepper,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/steppers.py", line 330, in advance_state
+    _advance_state_stepper_func(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/steppers.py", line 135, in _advance_state_stepper_func
+    state, dt = post_step_callback(state=state, step=istep, t=t, dt=dt)
+  File "./combozzle.py", line 1004, in my_post_step
+    fluid_state = construct_fluid_state(cv, tseed)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/compile.py", line 307, in __call__
+    return compiled_f(arg_id_to_arg)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py", line 281, in __call__
+    input_args_for_prg = _args_to_cl_buffers(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/compile.py", line 487, in _args_to_cl_buffers
+    return _args_to_device_buffers(actx, input_id_to_name_in_program,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/compile.py", line 473, in _args_to_device_buffers
+    arg = actx.freeze(arg)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/__init__.py", line 295, in freeze
+    evt, out_dict = pt_prg(self.queue, **bound_arguments)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 146, in __call__
+    return self.program(queue,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/loopy/loopy/translation_unit.py", line 347, in __call__
+    return pex(*args, **kwargs)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/loopy/loopy/target/pyopencl_execution.py", line 371, in __call__
+    return translation_unit_info.invoker(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/pytools/py_codegen.py", line 150, in __call__
+    return self.func(*args, **kwargs)
+  File "<generated code for 'invoke__pt_kernel_loopy_kernel'>", line 140, in invoke__pt_kernel_loopy_kernel
+  File "<generated code for 'invoke__pt_kernel_loopy_kernel'>", line 19, in _lpy_host__pt_kernel
+pyopencl._cl.RuntimeError: clEnqueueNDRangeKernel failed: OUT_OF_RESOURCES
+Reading user input from file: ./run_config/case_p2s256.yaml
+#### Simluation control data: ####
+	Casename: {casename}
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 2.0
+	domain_ylen = 1.0
+	y_scale = 2.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 8.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (33, 33, 17)
+rank=0,local_nelements=98304,global_nelements=98304
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.01552682761696306, h_max=0.01824506663895644
+rank=0,local_nelements=98304,global_nelements=98304
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s512.yaml --lazy
+./combozzle.py:1138: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:178607] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:178607] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:178607] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649222179.054552] [lassen67:178607:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:591: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.79 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+_pt_kernel: generate code: completed (0.51s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.81 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.81 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.84s wall 1.00x CPU)
+Loop Fusion: completed (0.90s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.68s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 0 iterations.
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+Unification converged after 0 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.63s wall 1.00x CPU)
+transform_loopy_program: completed (1.73s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.31s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.61 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.82s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.06s wall 1.00x CPU)
+Loop Fusion: completed (8.71s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.75s wall 1.00x CPU)
+Array Contraction: completed (4.21s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.96s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.38s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.27s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (40.74s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.44s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.83s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.20s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+transform_dag: completed (41.77s wall 1.00x CPU)
+generate_loopy: completed (80.05s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (153.92s wall 1.00x CPU)
+Loop Fusion: completed (158.26s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (400.08s wall 1.00x CPU)
+Array Contraction: completed (403.48s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.54s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (21.63s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.29s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.87s wall 1.00x CPU)
+transform_loopy_program: completed (645.22s wall 1.00x CPU)
+_pt_kernel: generate code: completed (25.57s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.10 s)
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1162, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 1079, in main
+    advance_state(rhs=my_rhs, timestepper=timestepper,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/steppers.py", line 330, in advance_state
+    _advance_state_stepper_func(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/steppers.py", line 129, in _advance_state_stepper_func
+    state = timestepper(state=state, t=t, dt=dt, rhs=compiled_rhs)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/integrators/lsrk.py", line 66, in euler_step
+    return lsrk_step(EulerCoefs, state, t, dt, rhs)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/integrators/lsrk.py", line 53, in lsrk_step
+    k = coefs.A[i]*k + dt*rhs(t + coefs.C[i]*dt, state)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/arraycontext/arraycontext/impl/pytato/compile.py", line 350, in __call__
+    return compiled_func(arg_id_to_arg)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py", line 285, in __call__
+    out_dict = execute_distributed_partition(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/distributed.py", line 1145, in execute_distributed_partition
+    exec_ready_part(part)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/distributed.py", line 1099, in exec_ready_part
+    _evt, result_dict = prg_per_partition[part.pid](queue,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/pytato/pytato/target/loopy/__init__.py", line 146, in __call__
+    return self.program(queue,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/loopy/loopy/translation_unit.py", line 347, in __call__
+    return pex(*args, **kwargs)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/loopy/loopy/target/pyopencl_execution.py", line 371, in __call__
+    return translation_unit_info.invoker(
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/pytools/py_codegen.py", line 150, in __call__
+    return self.func(*args, **kwargs)
+  File "<generated code for 'invoke__pt_kernel_loopy_kernel'>", line 3904, in invoke__pt_kernel_loopy_kernel
+  File "<generated code for 'invoke__pt_kernel_loopy_kernel'>", line 188, in _lpy_host__pt_kernel
+pyopencl._cl.MemoryError: memory_pool::allocate failed: MEM_OBJECT_ALLOCATION_FAILURE - failed to free memory for allocation
+Reading user input from file: ./run_config/case_p2s512.yaml
+#### Simluation control data: ####
+	Casename: {casename}
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (8.0, 8.0, 8.0)], periodic=(True, True, True)
+	Npts/axis: (33, 33, 33)
+rank=0,local_nelements=196608,global_nelements=196608
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.015526827616962767, h_max=0.018245066638957228
+rank=0,local_nelements=196608,global_nelements=196608
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s64.yaml --lazy
+./combozzle.py:1138: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:11428] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:11428] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:11428] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649223316.060307] [lassen67:11428:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:591: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.79 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+Array Contraction: completed (0.30s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.54s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.81 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.81 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.84s wall 1.00x CPU)
+Loop Fusion: completed (0.90s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.68s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 0 iterations.
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+Unification converged after 0 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.63s wall 1.00x CPU)
+transform_loopy_program: completed (1.74s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.47 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.31s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.61 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.82s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.06s wall 1.00x CPU)
+Loop Fusion: completed (8.70s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.77s wall 1.00x CPU)
+Array Contraction: completed (4.22s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.98s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.41s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.27s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.91 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.91 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.91 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (40.71s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.44s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.83s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.11s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+transform_dag: completed (41.68s wall 1.00x CPU)
+generate_loopy: completed (79.17s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (153.72s wall 1.00x CPU)
+Loop Fusion: completed (158.07s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (399.59s wall 1.00x CPU)
+Array Contraction: completed (402.99s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.54s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (21.76s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.55s wall 1.00x CPU)
+_pt_kernel: check variable access ordered: completed (0.34s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.92s wall 1.00x CPU)
+transform_loopy_program: completed (645.12s wall 1.00x CPU)
+_pt_kernel: generate code: completed (24.93s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.15 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Reading user input from file: ./run_config/case_p2s64.yaml
+#### Simluation control data: ####
+	Casename: {casename}
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (4.0, 4.0, 4.0)], periodic=(True, True, True)
+	Npts/axis: (17, 17, 17)
+rank=0,local_nelements=24576,global_nelements=24576
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.015526827616965076, h_max=0.018245066638955053
+rank=0,local_nelements=24576,global_nelements=24576
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+step = 0, sim time: 0.000000e+00 s
+------- step walltime: 941.897 s, log walltime: 0.000201941 s
+step = 1, sim time: 1.000000e-08 s
+------- step walltime: 0.407038 s, log walltime: 0.000177622 s
+step = 2, sim time: 2.000000e-08 s
+------- step walltime: 0.45274 s, log walltime: 9.799e-05 s
+step = 3, sim time: 3.000000e-08 s
+------- step walltime: 0.401486 s, log walltime: 9.84669e-05 s
+step = 4, sim time: 4.000000e-08 s
+------- step walltime: 0.414383 s, log walltime: 0.000108242 s
+step = 5, sim time: 5.000000e-08 s
+------- step walltime: 0.385814 s, log walltime: 0.000103951 s
+step = 6, sim time: 6.000000e-08 s
+------- step walltime: 0.38564 s, log walltime: 0.000109196 s
+step = 7, sim time: 7.000000e-08 s
+------- step walltime: 0.387056 s, log walltime: 0.000106335 s
+step = 8, sim time: 8.000000e-08 s
+------- step walltime: 0.386063 s, log walltime: 0.000116825 s
+step = 9, sim time: 9.000000e-08 s
+------- step walltime: 0.402071 s, log walltime: 0.000113249 s
+step = 10, sim time: 1.000000e-07 s
+------- step walltime: 0.386028 s, log walltime: 0.00011158 s
+step = 11, sim time: 1.100000e-07 s
+------- step walltime: 0.389081 s, log walltime: 0.000103951 s
+step = 12, sim time: 1.200000e-07 s
+------- step walltime: 0.384662 s, log walltime: 0.00011158 s
+step = 13, sim time: 1.300000e-07 s
+------- step walltime: 0.38654 s, log walltime: 0.000104427 s
+step = 14, sim time: 1.400000e-07 s
+------- step walltime: 0.390548 s, log walltime: 0.000104427 s
+step = 15, sim time: 1.500000e-07 s
+------- step walltime: 0.387028 s, log walltime: 9.9659e-05 s
+step = 16, sim time: 1.600000e-07 s
+------- step walltime: 0.40136 s, log walltime: 0.000104904 s
+step = 17, sim time: 1.700000e-07 s
+------- step walltime: 0.384395 s, log walltime: 9.67979e-05 s
+step = 18, sim time: 1.800000e-07 s
+------- step walltime: 0.387566 s, log walltime: 9.98974e-05 s
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+step = 19, sim time: 1.900000e-07 s
+------- step walltime: 1.44392 s, log walltime: 0.000109196 s
+Checkpointing final state ...
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.53 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.53 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+----- cfl=0.05
+P(-1082320.5375005868, 101375.63917113794), T(-16106.276791879685, 1508.610886127082)
+Unification converged after 0 iterations.
+rank=0: Invalid pressure data found.
+rank=0: Invalid temperature data found.
+Fluid solution failed health check.
+Traceback (most recent call last):
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 198, in main
+    run_command_line(args)
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 268, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/miniforge3/envs/timing.fusion/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "./combozzle.py", line 1162, in <module>
+    main(use_logmgr=args.log, use_leap=args.leap, input_file=input_file,
+  File "/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/mirgecom/mirgecom/mpi.py", line 157, in wrapped_func
+    func(*args, **kwargs)
+  File "./combozzle.py", line 1115, in main
+    raise MyRuntimeError("Failed simulation health check.")
+__main__.MyRuntimeError: Failed simulation health check.
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+python -m mpi4py ./combozzle.py -i ./run_config/case_p2s8.yaml --lazy
+./combozzle.py:1138: UserWarning: Automatically turning off DV logging. MIRGE-Com Issue(578)
+  warn("Automatically turning off DV logging. MIRGE-Com Issue(578)")
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/grudge/grudge/array_context.py:59: UserWarning: Your loopy and meshmode branches are mismatched. Please make sure that you have the https://github.com/kaushikcfd/loopy/tree/pytato-array-context-transforms branch of loopy.
+  warn("Your loopy and meshmode branches are mismatched. "
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              lassen67
+  Local adapter:           mlx5_1
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   lassen67
+  Local device: mlx5_1
+--------------------------------------------------------------------------
+[lassen67:22430] mca_base_component_repository_open: unable to open mca_pml_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:22430] mca_base_component_repository_open: unable to open mca_coll_ibm: libcollectives.so.3: cannot open shared object file: No such file or directory (ignored)
+[lassen67:22430] mca_base_component_repository_open: unable to open mca_osc_pami: libpami.so.3: cannot open shared object file: No such file or directory (ignored)
+[1649224324.363995] [lassen67:22430:0]         mxm.c:196  MXM  WARN  The 'ulimit -s' on the system is set to 'unlimited'. This may have negative performance implications. Please set the stack size to the default value (10240) 
+rank 0: sent all mesh partitions
+./combozzle.py:591: DeprecationWarning: EagerDGDiscretization is deprecated and will go away in 2022. Use the base DiscretizationCollection with grudge.op instead.
+  discr = EagerDGDiscretization(
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.79 s)
+Unification converged after 5 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.57s wall 1.00x CPU)
+Loop Fusion: completed (0.63s wall 1.00x CPU)
+Array Contraction: Contracting 7 temps
+_pt_kernel: generate code: completed (0.51s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (0.80 s)
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.84s wall 1.00x CPU)
+Loop Fusion: completed (0.91s wall 1.00x CPU)
+Array Contraction: Contracting 9 temps
+Array Contraction: completed (0.34s wall 1.00x CPU)
+_pt_kernel: generate code: completed (0.39s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 1 temps
+_pt_kernel: generate code: completed (0.66s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (1.31 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 0 iterations.
+/p/gpfs1/mtcampbe/CEESD/AutomatedTesting/MIRGE-Timing/timing/emirge.fusion/meshmode/meshmode/array_context.py:1559: UserWarning: FusionContractorArrayContext.transform_loopy_program not broad enough (yet). Falling back to a possibly slower transformation strategy.
+  warn("FusionContractorArrayContext.transform_loopy_program not"
+Unification converged after 0 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+find_partition: Split 32 nodes into 1 parts, with [32] nodes in each partition.
+Unification converged after 1 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.56s wall 1.00x CPU)
+Loop Fusion: completed (0.62s wall 1.00x CPU)
+Array Contraction: Contracting 1 temps
+_pt_kernel: schedule: completed (0.63s wall 1.00x CPU)
+transform_loopy_program: completed (1.74s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+_pt_kernel: generate code: completed (0.31s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.61 s)
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+Unification converged after 1 iterations.
+building face restriction: start
+building face restriction: done
+Unification converged after 1 iterations.
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.37s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 3 iterations.
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (0.33s wall 1.00x CPU)
+Loop Fusion: completed (0.36s wall 1.00x CPU)
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.35s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.46 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.45 s)
+Unification converged after 5 iterations.
+transform_dag.infer_axes_tags: completed (1.78s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (8.17s wall 1.00x CPU)
+Loop Fusion: completed (8.81s wall 1.00x CPU)
+Array Contraction: Contracting 54 temps
+contract_arrays on '_pt_kernel': completed (3.77s wall 1.00x CPU)
+Array Contraction: completed (4.23s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (1.91s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (2.47s wall 1.00x CPU)
+_pt_kernel: generate code: completed (3.19s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (3.93 s)
+data wrapper de-duplication: 5686 encountered, 65 kept, 5621 eliminated
+Unification converged after 22 iterations.
+transform_dag.infer_axes_tags[pre-partition]: completed (40.52s wall 1.00x CPU)
+find_partition: Split 9559 nodes into 1 parts, with [9559] nodes in each partition.
+transform_dag.mpms_materialization: completed (0.44s wall 1.00x CPU)
+transform_dag.naming_cse: completed (0.34s wall 1.00x CPU)
+transform_dag.reusing_data_wrappers: completed (0.61s wall 1.00x CPU)
+transform_dag.materialize_face_mass_ins_and_outs: completed (0.34s wall 1.00x CPU)
+transform_dag.materialize_all_einsums_or_reduces: completed (1.51s wall 1.00x CPU)
+Unification converged after 1 iterations.
+transform_dag.infer_axes_tags: completed (31.17s wall 1.00x CPU)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.63 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.52 s)
+transform_dag: completed (41.79s wall 1.00x CPU)
+generate_loopy: completed (79.90s wall 1.00x CPU)
+fuse_same_discretization_entity_loops on '_pt_kernel': completed (154.66s wall 1.00x CPU)
+Loop Fusion: completed (159.03s wall 1.00x CPU)
+Array Contraction: Contracting 919 temps
+contract_arrays on '_pt_kernel': completed (399.40s wall 1.00x CPU)
+Array Contraction: completed (402.82s wall 1.00x CPU)
+_pt_kernel: preprocess: completed (0.55s wall 1.00x CPU)
+preprocess_program on '_pt_kernel': completed (21.82s wall 1.00x CPU)
+_pt_kernel: check array access within bounds: completed (25.27s wall 1.00x CPU)
+_pt_kernel: check variable access ordered: completed (0.40s wall 1.00x CPU)
+_pt_kernel: schedule: completed (10.92s wall 1.00x CPU)
+transform_loopy_program: completed (645.91s wall 1.00x CPU)
+_pt_kernel: generate code: completed (24.99s wall 1.00x CPU)
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_0' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_1' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_2' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_3' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_4' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_5' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_6' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_7' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_8' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_9' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_10' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_11' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_12' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_13' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_14' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_15' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_16' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_17' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_18' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_19' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_20' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_21' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_22' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+build program: kernel '_pt_kernel_23' was part of a lengthy source build resulting from a binary cache miss (47.36 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+Reading user input from file: ./run_config/case_p2s8.yaml
+#### Simluation control data: ####
+	Casename: {casename}
+----- run control ------
+	grid_only=0,discr_only=0,inert_only=1
+	single_gas_only=0,dummy_rhs_only=0
+	periodic_boundary=1,adiabatic_boundary=0
+	timestepping_on=1, inviscid_only=0
+	av_on=1, sponge_on=1
+	nspecies=0
+---- timestepping ------
+	current_dt = 1e-08
+	t_final = 2e-07
+	constant_cfl = False
+	Time integration euler
+---- i/o frequencies -----
+	nviz = 1000
+	nrestart = 10000
+	nhealth = 100
+	nstatus = 10000
+----- domain ------
+	spatial dimension: 3
+	domain_xlen = 1.0
+	x_scale = 1.0
+	domain_ylen = 1.0
+	y_scale = 1.0
+	domain_zlen = 1.0
+	z_scale = 1.0
+	----- discretization ----
+	char_len = 0.25
+	order = 4
+	Shock capturing parameters: alpha_sc=0.5,  s0_sc=-5.0, kappa_sc=0.5
+Sponge parameters: sponge_amp=999999.9999999999, sponge_thickness=0.09, sponge_x0=0.9
+	Dependent variable logging is OFF.
+#### Simluation control data: ####
+---- Mesh generator inputs -----
+	Domain: [(0.0, 0.0, 0.0), (2.0, 2.0, 2.0)], periodic=(True, True, True)
+	Npts/axis: (9, 9, 9)
+rank=0,local_nelements=3072,global_nelements=3072
+----- Discretization info ----
+Discr: nodes.shape=(3,), h_min=0.015526827616966233, h_max=0.01824506663895388
+rank=0,local_nelements=3072,global_nelements=3072
+Input state (T,P,X) = (1500.0, 101325.0, [0.06542056 0.19626168 0.         0.         0.         0.
+ 0.73831776]
+Cantera state (rho,T,P,Y) = (0.23397065362031969, 1500.0, 101325.0, [0.06372925 0.21806609 0.         0.         0.         0.
+ 0.71820466]
+Timestepping: current_step=0, current_t=0, t_final=2e-07, current_dt=1e-08
+step = 0, sim time: 0.000000e+00 s
+------- step walltime: 941.884 s, log walltime: 0.000211477 s
+step = 1, sim time: 1.000000e-08 s
+------- step walltime: 0.0849428 s, log walltime: 0.000174046 s
+step = 2, sim time: 2.000000e-08 s
+------- step walltime: 0.0744324 s, log walltime: 9.9659e-05 s
+step = 3, sim time: 3.000000e-08 s
+------- step walltime: 0.0841 s, log walltime: 9.53674e-05 s
+step = 4, sim time: 4.000000e-08 s
+------- step walltime: 0.0848041 s, log walltime: 0.000101566 s
+step = 5, sim time: 5.000000e-08 s
+------- step walltime: 0.074909 s, log walltime: 9.44138e-05 s
+step = 6, sim time: 6.000000e-08 s
+------- step walltime: 0.0738759 s, log walltime: 0.000100136 s
+step = 7, sim time: 7.000000e-08 s
+------- step walltime: 0.0743077 s, log walltime: 9.53674e-05 s
+step = 8, sim time: 8.000000e-08 s
+------- step walltime: 0.0729644 s, log walltime: 0.000102043 s
+step = 9, sim time: 9.000000e-08 s
+------- step walltime: 0.074048 s, log walltime: 9.98974e-05 s
+step = 10, sim time: 1.000000e-07 s
+------- step walltime: 0.0735569 s, log walltime: 0.000103474 s
+step = 11, sim time: 1.100000e-07 s
+------- step walltime: 0.080231 s, log walltime: 9.34601e-05 s
+step = 12, sim time: 1.200000e-07 s
+------- step walltime: 0.0733683 s, log walltime: 0.00010252 s
+step = 13, sim time: 1.300000e-07 s
+------- step walltime: 0.0741031 s, log walltime: 9.32217e-05 s
+step = 14, sim time: 1.400000e-07 s
+------- step walltime: 0.0718875 s, log walltime: 0.00010252 s
+step = 15, sim time: 1.500000e-07 s
+------- step walltime: 0.0737543 s, log walltime: 9.34601e-05 s
+step = 16, sim time: 1.600000e-07 s
+------- step walltime: 0.0792077 s, log walltime: 9.53674e-05 s
+step = 17, sim time: 1.700000e-07 s
+------- step walltime: 0.0732996 s, log walltime: 9.32217e-05 s
+step = 18, sim time: 1.800000e-07 s
+------- step walltime: 0.0743549 s, log walltime: 9.32217e-05 s
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.48 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+_pt_kernel: generate code: completed (0.73s wall 1.00x CPU)
+step = 19, sim time: 1.900000e-07 s
+------- step walltime: 1.7715 s, log walltime: 9.29832e-05 s
+Checkpointing final state ...
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.51 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+build program: kernel '_pt_kernel' was part of a lengthy source build resulting from a binary cache miss (0.53 s)
+Unification converged after 1 iterations.
+Array Contraction: Contracting 0 temps
+----- cfl=0.05
+P(101325.0, 101325.0), T(1508.4191301832177, 1508.4191301832177)
+Unification converged after 0 iterations.
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@lassen710>
+Subject: Job 3433526: <combozzle_lazy_gridscale> in cluster <lassen> Done
+
+Job <combozzle_lazy_gridscale> was submitted from host <lassen709> by user <mtcampbe> in cluster <lassen> at Tue Apr  5 21:12:52 2022
+Job was executed on host(s) <1*lassen710>, in queue <pbatch>, as user <mtcampbe> in cluster <lassen> at Tue Apr  5 21:13:06 2022
+                            <40*lassen67>
+</g/g17/mtcampbe> was used as the home directory.
+</g/g17/mtcampbe/ceesd-timing/drivers_bozzle/grid_scale/3d> was used as the working directory.
+Started at Tue Apr  5 21:13:06 2022
+Terminated at Tue Apr  5 23:08:55 2022
+Results reported at Tue Apr  5 23:08:55 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash --login
+
+#BSUB -nnodes 1
+#BSUB -G uiuc
+#BSUB -W 480
+#BSUB -J combozzle_lazy_gridscale
+#BSUB -q pbatch
+
+. ./mirge_batch_env.sh
+. ${EMIRGE_HOME}/config/activate_env.sh
+
+config_files="./run_config/*.yaml"
+for file in $config_files
+do
+    printf "python -m mpi4py ./combozzle.py -i ${file} --lazy\n"
+    python -m mpi4py ./combozzle.py -i $file --lazy
+done
+
+mkdir -p run_logs
+mv *sqlite run_logs
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   2.00 sec.
+    Max Memory :                                 91 MB
+    Average Memory :                             59.25 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   1425 MB
+    Max Processes :                              4
+    Max Threads :                                27
+    Run time :                                   6949 sec.
+    Turnaround time :                            6963 sec.
+
+The output (if any) is above this job summary.
+
