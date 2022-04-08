@@ -71,7 +71,6 @@ from mirgecom.logging_quantities import (
     logmgr_add_device_memory_usage,
     set_sim_state
 )
-
 import cantera
 
 logger = logging.getLogger(__name__)
@@ -210,9 +209,9 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     # }}}  Time stepping control
 
-    init_temperature = 700.
+    init_temperature = 1500.0
     init_pressure = 101325.
-    init_density = 1.0
+    init_density = 0.23397065362031969
 
     dummy_rhs_only = 0
     timestepping_on = 1
@@ -226,6 +225,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     inert_only = 0
     single_gas_only = 0
     nspecies = 7
+    use_cantera = 0
 
     n_refine = 1
     weak_scale = 1
@@ -253,6 +253,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             pass
         try:
             dim = int(input_data["dim"])
+        except KeyError:
+            pass
+        try:
+            use_cantera = int(input_data["use_cantera"])
         except KeyError:
             pass
         try:
@@ -667,22 +671,22 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     if single_gas_only:
         nspecies = 0
         init_y = 0
-    else:
-        # {{{  Set up initial state using Cantera
+    elif use_cantera:
 
+        # {{{  Set up initial state using Cantera
+        
         # Use Cantera for initialization
         # -- Pick up a CTI for the thermochemistry config
         # --- Note: Users may add their own CTI file by dropping it into
         # ---       mirgecom/mechanisms alongside the other CTI files.
         from mirgecom.mechanisms import get_mechanism_cti
         mech_cti = get_mechanism_cti("uiuc")
-
+        
         cantera_soln = cantera.Solution(phase_id="gas", source=mech_cti)
         nspecies = cantera_soln.n_species
-
+        
         # Initial temperature, pressure, and mixutre mole fractions are needed
         # set up the initial state in Cantera.
-        temperature_seed = init_temperature
         # Parameters for calculating the amounts of fuel, oxidizer, and inert species
         equiv_ratio = 1.0
         ox_di_ratio = 0.21
@@ -698,8 +702,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         x[i_di] = (1.0-ox_di_ratio)*x[i_ox]/ox_di_ratio
         # Uncomment next line to make pylint fail when it can't find cantera.one_atm
         one_atm = cantera.one_atm  # pylint: disable=no-member
-        # one_atm = 101325.0
-
+        
         # Let the user know about how Cantera is being initilized
         print(f"Input state (T,P,X) = ({temperature_seed}, {one_atm}, {x}")
         # Set Cantera internal gas temperature, pressure, and mole fractios
@@ -716,7 +719,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         # *can_t*, *can_p* should not differ (much) from user's initial data,
         # but we want to ensure that we use the same starting point as Cantera,
         # so we use Cantera's version of these data.
-
+        
         # }}}
 
     # {{{ Create Pyrometheus thermochemistry object & EOS
@@ -727,9 +730,18 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     if inert_only or single_gas_only:
         eos = IdealSingleGas()
     else:
-        from mirgecom.thermochemistry import make_pyrometheus_mechanism_class
-        pyro_mechanism = make_pyrometheus_mechanism_class(cantera_soln)(actx.np)
-        eos = PyrometheusMixture(pyro_mechanism, temperature_guess=temperature_seed)
+        if use_cantera:
+            from mirgecom.thermochemistry import make_pyrometheus_mechanism_class
+            pyro_mechanism = make_pyrometheus_mechanism_class(cantera_soln)(actx.np)
+            eos = PyrometheusMixture(pyro_mechanism, temperature_guess=temperature_seed)
+        else:
+            from mirgecom.thermochemistry import get_pyrometheus_wrapper_class
+            from mirgecom.mechanisms.uiuc import Thermochemistry
+            pyro_mech = get_pyrometheus_wrapper_class(Thermochemistry)(actx.np)
+            nspecies = pyro_mech.num_species
+            species_names = pyro_mech.species_names
+            eos = PyrometheusMixture(pyro_mech, temperature_guess=temperature_seed)
+            init_y = [0.06372925, 0.21806609, 0., 0., 0., 0., 0.71820466]
 
     # {{{ Initialize simple transport model
 
@@ -861,7 +873,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                      constant_cfl=constant_cfl, initname=initname,
                                      eosname=eosname, casename=casename)
 
-    if inert_only == 0:
+    if inert_only == 0 and use_cantera:
         # Cantera equilibrate calculates the expected end
         # state @ chemical equilibrium
         # i.e. the expected state after all reactions
