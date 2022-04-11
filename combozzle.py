@@ -206,6 +206,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     nrestart = 1000
     do_checkpoint = 0
     boundary_report = 0
+    do_callbacks = 0
 
     # }}}  Time stepping control
 
@@ -340,6 +341,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         except KeyError:
             pass
         try:
+            do_callbacks = int(input_data["do_callbacks"])
+        except KeyError:
+            pass
+        try:
             nviz = int(input_data["nviz"])
         except KeyError:
             pass
@@ -451,7 +456,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         print(f"\t{single_gas_only=},{dummy_rhs_only=}")
         print(f"\t{periodic_boundary=},{adiabatic_boundary=}")
         print(f"\t{timestepping_on=}, {inviscid_only=}")
-        print(f"\t{av_on=}, {sponge_on=}")
+        print(f"\t{av_on=}, {sponge_on=}, {do_callbacks=}")
         print(f"\t{nspecies=}")
         print("---- timestepping ------")
         print(f"\tcurrent_dt = {current_dt}")
@@ -1029,6 +1034,24 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     from mirgecom.inviscid import inviscid_flux_rusanov
 
+    def dummy_pre_step(step, t, dt, state):
+        if logmgr:
+            logmgr.tick_before()
+        return state, dt
+
+    def dummy_post_step(step, t, dt, state):
+        if logmgr:
+            set_dt(logmgr, dt)
+            logmgr.tick_after()
+        return state, dt
+
+    pre_step_func = dummy_pre_step
+    post_step_func = dummy_post_step
+
+    if do_callbacks:
+        pre_step_func = my_pre_step
+        post_step_func = my_post_step
+
     def cfd_rhs(t, state):
         cv, tseed = state
         from mirgecom.gas_model import make_fluid_state
@@ -1091,8 +1114,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
         current_step, current_t, current_state = \
             advance_state(rhs=my_rhs, timestepper=timestepper,
-                          pre_step_callback=my_pre_step, istep=current_step,
-                          post_step_callback=my_post_step, dt=current_dt,
+                          pre_step_callback=pre_step_func, istep=current_step,
+                          post_step_callback=post_step_func, dt=current_dt,
                           state=make_obj_array([current_cv, temperature_seed]),
                           t=current_t, t_final=t_final)
 
