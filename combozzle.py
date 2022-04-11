@@ -206,7 +206,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     nrestart = 1000
     do_checkpoint = 0
     boundary_report = 0
-    do_callbacks = 0
+    do_callbacks = 1
 
     # }}}  Time stepping control
 
