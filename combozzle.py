@@ -738,14 +738,16 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         if use_cantera:
             from mirgecom.thermochemistry import make_pyrometheus_mechanism_class
             pyro_mechanism = make_pyrometheus_mechanism_class(cantera_soln)(actx.np)
-            eos = PyrometheusMixture(pyro_mechanism, temperature_guess=temperature_seed)
+            eos = PyrometheusMixture(pyro_mechanism,
+                                     temperature_guess=temperature_seed)
         else:
             from mirgecom.thermochemistry import get_pyrometheus_wrapper_class
             from mirgecom.mechanisms.uiuc import Thermochemistry
-            pyro_mech = get_pyrometheus_wrapper_class(Thermochemistry)(actx.np)
-            nspecies = pyro_mech.num_species
-            species_names = pyro_mech.species_names
-            eos = PyrometheusMixture(pyro_mech, temperature_guess=temperature_seed)
+            pyro_mechanism = get_pyrometheus_wrapper_class(Thermochemistry)(actx.np)
+            nspecies = pyro_mechanism.num_species
+            species_names = pyro_mechanism.species_names
+            eos = PyrometheusMixture(pyro_mechanism,
+                                     temperature_guess=temperature_seed)
             init_y = [0.06372925, 0.21806609, 0., 0., 0., 0., 0.71820466]
 
     # {{{ Initialize simple transport model
@@ -1032,7 +1034,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
         return make_obj_array([cv, fluid_state.temperature]), dt
 
-    from mirgecom.inviscid import inviscid_flux_rusanov
+    from mirgecom.inviscid import inviscid_facial_flux_rusanov
 
     def dummy_pre_step(step, t, dt, state):
         if logmgr:
@@ -1059,15 +1061,17 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                                        temperature_seed=tseed)
         if inviscid_only:
             fluid_rhs = \
-                euler_operator(discr, state=fluid_state, time=t,
-                               boundaries=boundaries, gas_model=gas_model,
-                               inviscid_numerical_flux_func=inviscid_flux_rusanov,
-                               quadrature_tag=quadrature_tag)
+                euler_operator(
+                    discr, state=fluid_state, time=t,
+                    boundaries=boundaries, gas_model=gas_model,
+                    inviscid_numerical_flux_func=inviscid_facial_flux_rusanov,
+                    quadrature_tag=quadrature_tag)
         else:
             fluid_rhs = \
-                ns_operator(discr, state=fluid_state, time=t, boundaries=boundaries,
-                            gas_model=gas_model, quadrature_tag=quadrature_tag,
-                            inviscid_numerical_flux_func=inviscid_flux_rusanov)
+                ns_operator(
+                    discr, state=fluid_state, time=t, boundaries=boundaries,
+                    gas_model=gas_model, quadrature_tag=quadrature_tag,
+                    inviscid_numerical_flux_func=inviscid_facial_flux_rusanov)
 
         if inert_only:
             chem_rhs = 0*fluid_rhs
