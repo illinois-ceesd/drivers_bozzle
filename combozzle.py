@@ -47,7 +47,10 @@ from mirgecom.simutil import (
 )
 from mirgecom.io import make_init_message
 from mirgecom.mpi import mpi_entry_point
-from mirgecom.integrators import rk4_step, euler_step
+from mirgecom.integrators import (
+    rk4_step, euler_step,
+    lsrk54_step, lsrk144_step
+)
 from mirgecom.steppers import advance_state
 from mirgecom.initializers import (
     MixtureInitializer,
@@ -61,7 +64,7 @@ from mirgecom.transport import SimpleTransport
 from mirgecom.gas_model import GasModel
 from arraycontext import thaw
 from mirgecom.artificial_viscosity import (
-    av_laplacian_operator, 
+    av_laplacian_operator,
     smoothness_indicator
 )
 from mirgecom.logging_quantities import (
@@ -98,7 +101,7 @@ def _get_box_mesh(dim, a, b, n, t=None, periodic=None):
 
 
 class InitSponge:
-    r"""Solution initializer for flow in the ACT-II facility
+    r"""Solution initializer for flow in the ACT-II facility.
 
     This initializer creates a physics-consistent flow solution
     given the top and bottom geometry profiles and an EOS using isentropic
@@ -112,6 +115,7 @@ class InitSponge:
     .. automethod:: __init__
     .. automethod:: __call__
     """
+
     def __init__(self, *, x0, thickness, amplitude):
         r"""Initialize the sponge parameters.
 
@@ -124,7 +128,6 @@ class InitSponge:
         amplitude: float
             sponge strength modifier
         """
-
         self._x0 = x0
         self._thickness = thickness
         self._amplitude = amplitude
@@ -147,10 +150,11 @@ class InitSponge:
 
         return self._amplitude * actx.np.where(
             actx.np.greater(xpos, x0),
-            (zeros + ((xpos - self._x0)/self._thickness) *
-            ((xpos - self._x0)/self._thickness)),
+            (zeros + ((xpos - self._x0)/self._thickness)
+             * ((xpos - self._x0) / self._thickness)),
             zeros + 0.0
         )
+
 
 @mpi_entry_point
 def main(ctx_factory=cl.create_some_context, use_logmgr=True,
@@ -373,8 +377,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         except KeyError:
             pass
         try:
-            logDependent = int(input_data["log_dependent"])
-            log_dependent = logDependent > 0
+            log_dependent = bool(input_data["log_dependent"])
         except KeyError:
             pass
         try:
@@ -451,13 +454,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     if rank == 0:
         print("#### Simluation control data: ####")
         print(f"\tCasename: {casename}")
-        print(f"----- run control ------")
+        print("----- run control ------")
         print(f"\t{grid_only=},{discr_only=},{inert_only=}")
         print(f"\t{single_gas_only=},{dummy_rhs_only=}")
         print(f"\t{periodic_boundary=},{adiabatic_boundary=}")
         print(f"\t{timestepping_on=}, {inviscid_only=}")
         print(f"\t{av_on=}, {sponge_on=}, {do_callbacks=}")
-        print(f"\t{nspecies=}")
+        print(f"\t{nspecies=}, {init_only=}")
+        print(f"\t{health_pres_min=}, {health_pres_max=}")
         print("---- timestepping ------")
         print(f"\tcurrent_dt = {current_dt}")
         print(f"\tt_final = {t_final}")
@@ -480,7 +484,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         if dim > 2:
             print(f"\tdomain_zlen = {domain_xlen}")
             print(f"\tz_scale = {z_scale}")
-        print(f"\t----- discretization ----")
+        print("\t----- discretization ----")
         print(f"\tchar_len = {chlen}")
         print(f"\torder = {order}")
 
@@ -632,7 +636,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     ones = discr.zeros(actx) + 1.0
 
     if rank == 0:
-        print(f"----- Discretization info ----")
+        print("----- Discretization info ----")
         print(f"Discr: {nodes.shape=}, {order=}, {h_min=}, {h_max=}")
     for i in range(nparts):
         if rank == i:
@@ -679,17 +683,17 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     elif use_cantera:
 
         # {{{  Set up initial state using Cantera
-        
+
         # Use Cantera for initialization
         # -- Pick up a CTI for the thermochemistry config
         # --- Note: Users may add their own CTI file by dropping it into
         # ---       mirgecom/mechanisms alongside the other CTI files.
         from mirgecom.mechanisms import get_mechanism_cti
         mech_cti = get_mechanism_cti("uiuc")
-        
+
         cantera_soln = cantera.Solution(phase_id="gas", source=mech_cti)
         nspecies = cantera_soln.n_species
-        
+
         # Initial temperature, pressure, and mixutre mole fractions are needed
         # set up the initial state in Cantera.
         # Parameters for calculating the amounts of fuel, oxidizer, and inert species
@@ -707,7 +711,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         x[i_di] = (1.0-ox_di_ratio)*x[i_ox]/ox_di_ratio
         # Uncomment next line to make pylint fail when it can't find cantera.one_atm
         one_atm = cantera.one_atm  # pylint: disable=no-member
-        
+
         # Let the user know about how Cantera is being initilized
         print(f"Input state (T,P,X) = ({temperature_seed}, {one_atm}, {x}")
         # Set Cantera internal gas temperature, pressure, and mole fractios
@@ -724,7 +728,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         # *can_t*, *can_p* should not differ (much) from user's initial data,
         # but we want to ensure that we use the same starting point as Cantera,
         # so we use Cantera's version of these data.
-        
+
         # }}}
 
     # {{{ Create Pyrometheus thermochemistry object & EOS
@@ -745,7 +749,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             from mirgecom.mechanisms.uiuc import Thermochemistry
             pyro_mechanism = get_pyrometheus_wrapper_class(Thermochemistry)(actx.np)
             nspecies = pyro_mechanism.num_species
-            species_names = pyro_mechanism.species_names
+            # species_names = pyro_mechanism.species_names
             eos = PyrometheusMixture(pyro_mechanism,
                                      temperature_guess=temperature_seed)
             init_y = [0.06372925, 0.21806609, 0., 0., 0., 0., 0.71820466]
@@ -967,19 +971,20 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
         return health_error
 
-    from mirgecom.viscous import (
-        get_viscous_timestep,
-        get_viscous_cfl
-    )
+    # from mirgecom.viscous import (
+    #     get_viscous_timestep,
+    #     get_viscous_cfl
+    # )
 
     def compute_av_alpha_field(state):
-        """ Scale alpha by the element characteristic length """
+        """Scale alpha by the element characteristic length."""
         return alpha_sc*state.speed*length_scales
 
     def my_pre_step(step, t, dt, state):
         cv, tseed = state
         fluid_state = construct_fluid_state(cv, tseed)
         dv = fluid_state.dv
+
         dt = get_sim_timestep(discr, fluid_state, t=t, dt=dt, cfl=current_cfl,
                               t_final=t_final, constant_cfl=constant_cfl)
 
@@ -1003,7 +1008,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                         raise MyRuntimeError("Failed simulation health check.")
 
                 if do_status:
-                    my_write_status(dt=dt, cfl=cfl, dv=dv)
+                    my_write_status(dt=dt, cfl=current_cfl, dv=dv)
 
                 if do_restart:
                     my_write_restart(step=step, t=t, state=fluid_state,
@@ -1021,8 +1026,6 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     def my_post_step(step, t, dt, state):
         cv, tseed = state
-        # this is where the seed is updated step-to-step
-        fluid_state = construct_fluid_state(cv, tseed)
 
         # Logmgr needs to know about EOS, dt, dim?
         # imo this is a design/scope flaw
@@ -1032,7 +1035,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
                 set_sim_state(logmgr, dim, cv, gas_model.eos)
             logmgr.tick_after()
 
-        return make_obj_array([cv, fluid_state.temperature]), dt
+        return state, dt
 
     from mirgecom.inviscid import inviscid_facial_flux_rusanov
 
@@ -1054,19 +1057,33 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         pre_step_func = my_pre_step
         post_step_func = my_post_step
 
+    from mirgecom.flux import gradient_flux as gradient_num_flux_central
+    from mirgecom.gas_model import make_fluid_operator_states
+    from mirgecom.navierstokes import grad_cv_operator
+
     def cfd_rhs(t, state):
         cv, tseed = state
         from mirgecom.gas_model import make_fluid_state
         fluid_state = make_fluid_state(cv=cv, gas_model=gas_model,
                                        temperature_seed=tseed)
+        fluid_operator_states = make_fluid_operator_states(discr, fluid_state,
+                                                           gas_model, boundaries,
+                                                           quadrature_tag)
+
         if inviscid_only:
             fluid_rhs = \
                 euler_operator(
                     discr, state=fluid_state, time=t,
                     boundaries=boundaries, gas_model=gas_model,
                     inviscid_numerical_flux_func=inviscid_facial_flux_rusanov,
-                    quadrature_tag=quadrature_tag)
+                    quadrature_tag=quadrature_tag,
+                    operator_states_quad=fluid_operator_states)
         else:
+            grad_cv = grad_cv_operator(discr, gas_model, boundaries, fluid_state,
+                                       time=t,
+                                       numerical_flux_func=gradient_num_flux_central,
+                                       quadrature_tag=quadrature_tag,
+                                       operator_states_quad=fluid_operator_states)
             fluid_rhs = \
                 ns_operator(
                     discr, state=fluid_state, time=t, boundaries=boundaries,
@@ -1080,11 +1097,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
         if av_on:
             alpha_f = compute_av_alpha_field(fluid_state)
-            av_rhs = av_laplacian_operator(discr, fluid_state=fluid_state,
-                                           boundaries=boundaries,
-                                           boundary_kwargs={"time": t,
-                                                            "gas_model": gas_model},
-                                           alpha=alpha_f, s0=s0_sc, kappa=kappa_sc)
+            indicator = smoothness_indicator(discr, fluid_state.mass_density,
+                                             kappa=kappa_sc, s0=s0_sc)
+            av_rhs = av_laplacian_operator(
+                discr, fluid_state=fluid_state, boundaries=boundaries, time=t,
+                gas_model=gas_model, grad_cv=grad_cv,
+                operator_states_quad=fluid_operator_states,
+                alpha=alpha_f, s0=s0_sc, kappa=kappa_sc,
+                indicator=indicator)
         else:
             av_rhs = 0*fluid_rhs
 
@@ -1094,7 +1114,8 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             sponge_rhs = 0*fluid_rhs
 
         fluid_rhs = fluid_rhs + chem_rhs + av_rhs + sponge_rhs
-        tseed_rhs = 0*tseed
+        tseed_rhs = fluid_state.temperature - tseed
+
         return make_obj_array([fluid_rhs, tseed_rhs])
 
     def dummy_rhs(t, state):
