@@ -1068,7 +1068,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         post_step_func = my_post_step
 
     from mirgecom.flux import gradient_flux as gradient_num_flux_central
-    from mirgecom.gas_model import make_fluid_operator_states
+    from mirgecom.gas_model import make_operator_fluid_states
     from mirgecom.navierstokes import grad_cv_operator
 
     def cfd_rhs(t, state):
@@ -1076,7 +1076,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
         from mirgecom.gas_model import make_fluid_state
         fluid_state = make_fluid_state(cv=cv, gas_model=gas_model,
                                        temperature_seed=tseed)
-        fluid_operator_states = make_fluid_operator_states(discr, fluid_state,
+        fluid_operator_states = make_operator_fluid_states(discr, fluid_state,
                                                            gas_model, boundaries,
                                                            quadrature_tag)
 
