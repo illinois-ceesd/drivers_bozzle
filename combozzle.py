@@ -178,16 +178,23 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     from mirgecom.simutil import global_reduce as _global_reduce
     global_reduce = partial(_global_reduce, comm=comm)
 
-    # Some discretization parameters
+    # {{{ Some discretization parameters
+
     dim = 3
     order = 1
+
+    # - scales the size of the domain
     x_scale = 1
     y_scale = 1
     z_scale = 1
+
+    # - params for unscaled npts/axis
     domain_xlen = 1.
     domain_ylen = 1.
     domain_zlen = 1.
     chlen = .25  # default to 4 elements/axis = x_len/chlen
+
+    # }}} discretization params
 
     # {{{ Time stepping control
 
@@ -215,32 +222,45 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
 
     # }}}  Time stepping control
 
-    init_temperature = 1500.0
-    init_pressure = 101325.
-    init_density = 0.23397065362031969
+    # {{{ Some solution parameters
 
     dummy_rhs_only = 0
     timestepping_on = 1
     av_on = 1
     sponge_on = 1
+
+    # }}}
+
+    # {{{ Boundary configuration params
+
     adiabatic_boundary = 0
     periodic_boundary = 1
     multiple_boundaries = False
+
+    # }}}
+
+    # {{{ Simulation control parameters
+
     grid_only = 0
     discr_only = 0
     inviscid_only = 0
     inert_only = 0
+    init_only = 0
     single_gas_only = 0
     nspecies = 7
     use_cantera = 0
 
-    n_refine = 1
-    weak_scale = 1
+    # }}}
 
-    # av parameters
+    # coarse-scale grid/domain control
+    n_refine = 1  # scales npts/axis uniformly
+    weak_scale = 1  # scales domain and npts/axis keeping dt constant
+
+    # AV / Shock-capturing parameters
     alpha_sc = 0.5
     s0_sc = -5.0
     kappa_sc = 0.5
+
     # sponge parameters
     sponge_thickness = 0.09
     sponge_amp = 1.0/current_dt/1000.
@@ -519,6 +539,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     xsize = domain_xlen*x_scale*weak_scale
     ysize = domain_ylen*y_scale*weak_scale
     zsize = domain_zlen*z_scale*weak_scale
+
     ncx = int(xsize / chlen)
     ncy = int(ysize / chlen)
     ncz = int(zsize / chlen)
