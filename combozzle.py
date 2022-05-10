@@ -34,6 +34,7 @@ from meshmode.array_context import PyOpenCLArrayContext
 
 from meshmode.mesh import BTAG_ALL, BTAG_NONE  # noqa
 from grudge.eager import EagerDGDiscretization
+from grudge.dof_desc import DTAG_BOUNDARY
 from grudge.shortcuts import make_visualizer
 
 from logpyle import IntervalTimer, set_dt
@@ -224,6 +225,7 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     sponge_on = 1
     adiabatic_boundary = 0
     periodic_boundary = 1
+    multiple_boundaries = False
     grid_only = 0
     discr_only = 0
     inviscid_only = 0
@@ -334,6 +336,10 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
             pass
         try:
             adiabatic_boundary = int(input_data["adiabatic_boundary"])
+        except KeyError:
+            pass
+        try:
+            multiple_boundaries = bool(input_data["multiple_boundaries"])
         except KeyError:
             pass
         try:
@@ -816,10 +822,14 @@ def main(ctx_factory=cl.create_some_context, use_logmgr=True,
     else:
         wall = isothermal_wall
 
-    if periodic_boundary:
-        boundaries = {}  # For periodic, also set above in meshgen
-    else:
-        boundaries = {BTAG_ALL: wall}
+    boundaries = {}  # periodic-compatible
+    if not periodic:
+        if multiple_boundaries:
+            for idir in range(dim):
+                boundaries[DTAG_BOUNDARY(f"+{idir}")] = wall
+                boundaries[DTAG_BOUNDARY(f"-{idir}")] = wall
+        else:
+            boundaries = {BTAG_ALL: wall}
 
     if boundary_report:
         from mirgecom.simutil import boundary_report
